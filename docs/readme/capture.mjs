@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ONLY = (process.argv[2] ?? "shots,pdf,video").split(",");
-const BASE = process.argv[3] ?? "http://127.0.0.1:3100";
+const BASE = process.argv[3] ?? "http://127.0.0.1:3101"; // a server in demo mode (LLM_API_KEY empty)
 const browser = await chromium.launch();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -36,7 +36,7 @@ for (const theme of ONLY.includes("shots") ? ["light", "dark"] : []) {
   const ctx = await context(theme);
   const page = await ctx.newPage();
   await page.goto(BASE);
-  await wait(2600);
+  await wait(6500); // let the case-file annotation and stamp finish
   await page.screenshot({ path: join(here, `landing-${theme}.png`) });
 
   await analyzedDashboard(page);
@@ -117,11 +117,11 @@ if (ONLY.includes("video")) {
   };
 
   await page.goto(BASE);
-  await wait(3200);
+  await wait(5800);
   await smoothScroll(700);
   await wait(1200);
   await smoothScroll(-700);
-  await page.getByRole("link", { name: "Get started" }).click();
+  await page.getByRole("link", { name: "File a case" }).click();
   await page.getByLabel("Full name").pressSequentially("Asha Verma", { delay: 45 });
   await page.getByLabel("Email").pressSequentially("asha@lexagent.test", { delay: 35 });
   await page.getByLabel("Password").pressSequentially("demo-pass", { delay: 35 });

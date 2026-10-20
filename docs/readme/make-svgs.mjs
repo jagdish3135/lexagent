@@ -10,14 +10,14 @@ const SANS = "'Segoe UI', Helvetica, Arial, sans-serif";
 
 const THEMES = {
   dark: {
-    bg: "#0b1220", bg2: "#121a2b", card: "#121a2b", line: "#26324b", ink: "#ede7da", muted: "#a3acbd",
-    accent: "#f2b661", tile: "#1e2d52", tileInk: "#f2b661", chip: "#19243a",
-    agents: [["#8db2ff", "#16264a"], ["#f7c35c", "#2e2512"], ["#6bd99a", "#12301f"], ["#ff8a7a", "#3a1714"]],
+    bg: "#12110e", bg2: "#1a1814", card: "#1d1b16", line: "#3a352c", ink: "#efe8da", muted: "#a39a8a",
+    accent: "#ff6b4a", tile: "#efe8da", tileInk: "#12110e", chip: "#1d1b16",
+    agents: [["#93acff", "#1c2440"], ["#f2bd5c", "#2e2512"], ["#7fd492", "#152a1a"], ["#ff8a73", "#351a14"]],
   },
   light: {
-    bg: "#f7f3ea", bg2: "#efe7d6", card: "#ffffff", line: "#e2d9c6", ink: "#14213d", muted: "#566074",
-    accent: "#c2630f", tile: "#14213d", tileInk: "#f2b661", chip: "#ffffff",
-    agents: [["#1d4ed8", "#e6edff"], ["#a15c00", "#fdf0d5"], ["#157f3d", "#e3f4e8"], ["#b42318", "#fde8e6"]],
+    bg: "#f4efe4", bg2: "#ebe4d4", card: "#fbf8f1", line: "#d3c9b5", ink: "#17140f", muted: "#6a6152",
+    accent: "#c63a1f", tile: "#17140f", tileInk: "#f4efe4", chip: "#fbf8f1",
+    agents: [["#2445b5", "#e2e7f6"], ["#9c5c07", "#f5e8cc"], ["#2c7140", "#dfeedd"], ["#b0301a", "#f6e0d9"]],
   },
 };
 
@@ -32,11 +32,11 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
 const mark = (x, y, size, t) => `
   <g transform="translate(${x} ${y}) scale(${size / 64})">
-    <rect width="64" height="64" rx="16" fill="${t.tile}"/>
+    <rect width="64" height="64" fill="${t.tile}"/>
     <g fill="none" stroke="${t.tileInk}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M32 14v34M22 48h20M18 22h28"/><path d="M18 22l-7 14h14zM46 22l-7 14h14z"/>
     </g>
-    <circle cx="32" cy="14" r="3.4" fill="${t.tileInk}"/>
+    <circle cx="32" cy="14" r="3.6" fill="${t.accent}"/>
   </g>`;
 
 function banner(t) {
@@ -46,7 +46,7 @@ function banner(t) {
   const chipSvg = chips
     .map((c) => {
       const w = Math.round(c.length * 8.1 + 30);
-      const s = `<g transform="translate(${cx} 322)"><rect width="${w}" height="36" rx="18" fill="${t.chip}" stroke="${t.line}"/><text x="${w / 2}" y="23" text-anchor="middle" font-family="${SANS}" font-size="14.5" font-weight="600" fill="${t.ink}">${esc(c)}</text></g>`;
+      const s = `<g transform="translate(${cx} 322)"><rect width="${w}" height="36" fill="${t.chip}" stroke="${t.line}"/><text x="${w / 2}" y="23" text-anchor="middle" font-family="${SANS}" font-size="14.5" font-weight="600" fill="${t.ink}">${esc(c)}</text></g>`;
       cx += w + 12;
       return s;
     })
@@ -60,8 +60,8 @@ function banner(t) {
     const kt = (doneAt[i] / cycle).toFixed(3);
     return `
     <g transform="translate(850 ${y})">
-      <rect width="360" height="58" rx="14" fill="${t.card}" stroke="${t.line}"/>
-      <rect width="6" height="58" rx="3" fill="${c}"/>
+      <rect width="360" height="58" fill="${t.card}" stroke="${t.line}"/>
+      <rect width="5" height="58" fill="${c}"/>
       <circle cx="36" cy="29" r="15" fill="${soft}"/>
       <text x="36" y="34" text-anchor="middle" font-family="${SANS}" font-size="14" font-weight="800" fill="${c}">${i + 1}</text>
       <text x="62" y="26" font-family="${SANS}" font-size="16" font-weight="700" fill="${t.ink}">${name}</text>
@@ -83,16 +83,16 @@ function banner(t) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="LexAgent: multi-agent legal case analysis for Indian law">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${t.bg}"/><stop offset="1" stop-color="${t.bg2}"/></linearGradient>
-    <clipPath id="clip"><rect width="${W}" height="${H}" rx="24"/></clipPath>
+    <clipPath id="clip"><rect width="${W}" height="${H}"/></clipPath>
     <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="${t.line}"/></pattern>
   </defs>
   <g clip-path="url(#clip)">
     <rect width="${W}" height="${H}" fill="url(#g)"/>
     <rect x="780" y="0" width="500" height="${H}" fill="url(#dots)" opacity="0.7"/>
-    <rect x="0" y="${H - 6}" width="${W}" height="6" fill="${t.accent}" opacity="0.9"/>
+    <rect x="0" y="${H - 8}" width="${W}" height="1.5" fill="${t.ink}"/><rect x="0" y="${H - 4}" width="${W}" height="1.5" fill="${t.ink}"/>
   </g>
   ${mark(72, 84, 72, t)}
-  <text x="164" y="140" font-family="${SERIF}" font-size="62" font-weight="700" fill="${t.ink}">LexAgent</text>
+  <text x="164" y="140" font-family="${SERIF}" font-size="66" fill="${t.ink}">Lex<tspan font-style="italic" fill="${t.accent}">Agent</tspan></text>
   <text x="166" y="176" font-family="${SANS}" font-size="15" font-weight="700" letter-spacing="3" fill="${t.accent}">MULTI-AGENT LEGAL ANALYSIS · INDIAN LAW</text>
   <text x="72" y="236" font-family="${SANS}" font-size="22" fill="${t.ink}">Upload a case file. Four AI agents summarize it, find the law,</text>
   <text x="72" y="268" font-family="${SANS}" font-size="22" fill="${t.ink}">check each other's work and hand you a <tspan font-weight="700" fill="${t.accent}">PDF brief</tspan> in minutes.</text>
@@ -107,8 +107,8 @@ function pipeline(t) {
   const node = (x, y, w, h, i, title, sub) => {
     const [c, soft] = t.agents[i];
     return `<g transform="translate(${x} ${y})">
-      <rect width="${w}" height="${h}" rx="16" fill="${t.card}" stroke="${t.line}" stroke-width="1.5"/>
-      <rect width="${w}" height="7" rx="3.5" fill="${c}"/>
+      <rect width="${w}" height="${h}" fill="${t.card}" stroke="${t.line}" stroke-width="1.5"/>
+      <rect width="5" height="${h}" fill="${c}"/>
       <circle cx="34" cy="${h / 2 + 3}" r="17" fill="${soft}"/>
       <text x="34" y="${h / 2 + 9}" text-anchor="middle" font-family="${SANS}" font-size="16" font-weight="800" fill="${c}">${i + 1}</text>
       <text x="62" y="${h / 2 - 1}" font-family="${SANS}" font-size="17" font-weight="700" fill="${t.ink}">${title}</text>
@@ -127,11 +127,11 @@ function pipeline(t) {
     .join("\n");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="LexAgent pipeline: document to two parallel agents, a cross-verifier, a chief analyst and a PDF report">
-  <rect width="${W}" height="${H}" rx="24" fill="${t.bg}"/>
+  <rect width="${W}" height="${H}" fill="${t.bg}" stroke="${t.ink}" stroke-width="2"/>
   ${wireSvg}
 
   <g transform="translate(40 160)">
-    <rect width="160" height="150" rx="16" fill="${t.card}" stroke="${t.line}" stroke-width="1.5"/>
+    <rect width="160" height="150" fill="${t.card}" stroke="${t.line}" stroke-width="1.5"/>
     <text x="22" y="40" font-family="${SANS}" font-size="13" font-weight="800" letter-spacing="2" fill="${t.accent}">CASE FILE</text>
     ${[58, 76, 94, 112].map((y, i) => `<rect x="22" y="${y}" width="${i === 3 ? 70 : 116}" height="8" rx="4" fill="${t.line}"/>`).join("")}
     <text x="80" y="176" text-anchor="middle" font-family="${SANS}" font-size="12.5" font-weight="600" fill="${t.muted}">PDF · DOCX · TXT</text>
@@ -150,13 +150,13 @@ function pipeline(t) {
   <circle r="6" fill="${t.agents[3][0]}"><animateMotion dur="1.8s" begin="3s" repeatCount="indefinite" path="M890 385 C 960 385, 950 235, 1010 235"/></circle>
 
   <g transform="translate(1010 165)">
-    <rect width="150" height="140" rx="16" fill="${t.tile}"/>
-    <text x="75" y="64" text-anchor="middle" font-family="${SANS}" font-size="30" font-weight="800" fill="${t.tileInk}">PDF</text>
-    <text x="75" y="92" text-anchor="middle" font-family="${SANS}" font-size="12.5" font-weight="700" letter-spacing="2" fill="#ffffff" opacity="0.85">REPORT</text>
-    <text x="75" y="114" text-anchor="middle" font-family="${SANS}" font-size="11" fill="#ffffff" opacity="0.6">with LexAgent badge</text>
+    <rect width="150" height="140" fill="${t.tile}"/>
+    <text x="75" y="64" text-anchor="middle" font-family="${SANS}" font-size="30" font-weight="800" fill="${t.accent}">PDF</text>
+    <text x="75" y="92" text-anchor="middle" font-family="${SANS}" font-size="12.5" font-weight="700" letter-spacing="2" fill="${t.tileInk}" opacity="0.85">REPORT</text>
+    <text x="75" y="114" text-anchor="middle" font-family="${SANS}" font-size="11" fill="${t.tileInk}" opacity="0.6">with LexAgent seal</text>
   </g>
 
-  <text x="40" y="58" font-family="${SERIF}" font-size="26" font-weight="700" fill="${t.ink}">How a case moves through LexAgent</text>
+  <text x="40" y="58" font-family="${SERIF}" font-size="28" fill="${t.ink}">How a case moves through LexAgent</text>
   <text x="40" y="448" font-family="${SANS}" font-size="13.5" fill="${t.muted}">Each agent's result streams to the dashboard the moment it finishes · decision support only, never a verdict</text>
 </svg>
 `;

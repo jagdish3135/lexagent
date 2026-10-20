@@ -8,17 +8,17 @@
 </p>
 
 <p align="center">
-  <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-14213d?style=for-the-badge" alt="Watch the demo"></a>
-  <a href="#-run-it-locally"><img src="https://img.shields.io/badge/Run_it_in_2_minutes-f2b661?style=for-the-badge&logoColor=14213d" alt="Run it locally"></a>
-  <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-e07a1f?style=for-the-badge" alt="Open a sample PDF report"></a>
+  <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-17140f?style=for-the-badge" alt="Watch the demo"></a>
+  <a href="#-run-it-locally"><img src="https://img.shields.io/badge/Run_it_in_2_minutes-f4efe4?style=for-the-badge&labelColor=17140f" alt="Run it locally"></a>
+  <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-c63a1f?style=for-the-badge" alt="Open a sample PDF report"></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16">
   <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript strict">
-  <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-f2b661" alt="Works with Mistral, Groq or Gemini">
-  <img src="https://img.shields.io/badge/tests-10_passing-157f3d" alt="10 tests passing">
-  <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-b42318" alt="Knows BNS, BNSS and BSA">
+  <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-17140f" alt="Works with Mistral, Groq or Gemini">
+  <img src="https://img.shields.io/badge/tests-11_passing-2c7140" alt="10 tests passing">
+  <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-c63a1f" alt="Knows BNS, BNSS and BSA">
 </p>
 
 <p align="center">
