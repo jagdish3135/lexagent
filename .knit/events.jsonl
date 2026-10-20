@@ -1,0 +1,6 @@
+{"ts":"2026-10-20T20:42:43+05:30","type":"phase","agent":"manager","phase":"intake","msg":"LexAgent intake: upload PDF/DOCX, 4 agents, export, landing + dummy auth, free LLM, Vercel, solo"}
+{"ts":"2026-10-20T20:42:43+05:30","type":"decision","agent":"user","msg":"Free OpenAI-compatible provider via env (Groq default) with demo-mode fallback"}
+{"ts":"2026-10-20T20:42:43+05:30","type":"phase","agent":"manager","phase":"plan","msg":"plan.md written: 7 stories, 9 tasks"}
+{"ts":"2026-10-20T20:49:37+05:30","type":"gate","agent":"user","phase":"plan","result":"approved","msg":"Plan approved with changes: PDF-only export with badge, Mistral provider"}
+{"ts":"2026-10-20T20:49:37+05:30","type":"phase","agent":"manager","phase":"build","msg":"Build starts: T1 scaffold"}
+{"ts":"2026-10-20T20:49:37+05:30","type":"agent_start","agent":"frontend-dev","task":"1","msg":"Scaffold Next.js, tokens, theme, layout"}
