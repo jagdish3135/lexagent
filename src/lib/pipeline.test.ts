@@ -35,6 +35,12 @@ describe("createChatJson", () => {
     expect(init.headers.Authorization).toBe("Bearer k");
   });
 
+  it("does not retry when the key has zero quota", async () => {
+    const f = vi.fn().mockResolvedValue(new Response("", { status: 429, headers: { "x-ratelimit-limit-req-minute": "0" } }));
+    await expect(createChatJson(cfg, f as unknown as typeof fetch)("s", "u")).rejects.toThrow("no quota");
+    expect(f).toHaveBeenCalledTimes(1);
+  });
+
   it("gives a friendly error on a bad key and never leaks the body", async () => {
     const f = vi.fn().mockResolvedValue(new Response("secret details", { status: 401 }));
     await expect(createChatJson(cfg, f as unknown as typeof fetch)("s", "u")).rejects.toThrow("rejected the API key");

@@ -50,6 +50,10 @@ export function createChatJson(cfg: LlmConfig, fetchImpl: typeof fetch = fetch, 
         signal: AbortSignal.timeout(90_000),
       });
 
+      // A plan with zero quota (e.g. Mistral's free plan not activated yet) will never succeed: don't retry.
+      if (res.status === 429 && res.headers.get("x-ratelimit-limit-req-minute") === "0") {
+        throw new Error("This AI key has no quota yet. Activate the free plan in your AI provider's console, then try again");
+      }
       // Free tiers rate-limit hard (Mistral: about 1 request/second). Back off and try again.
       if ((res.status === 429 || res.status >= 500) && attempt < retries) {
         const retryAfter = Number(res.headers.get("retry-after"));
