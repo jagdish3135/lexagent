@@ -19,6 +19,7 @@ const csp = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  turbopack: { root: process.cwd() },
   agentRules: false,
   poweredByHeader: false,
   async headers() {

@@ -4,3 +4,7 @@
 {"ts":"2026-10-20T20:49:37+05:30","type":"gate","agent":"user","phase":"plan","result":"approved","msg":"Plan approved with changes: PDF-only export with badge, Mistral provider"}
 {"ts":"2026-10-20T20:49:37+05:30","type":"phase","agent":"manager","phase":"build","msg":"Build starts: T1 scaffold"}
 {"ts":"2026-10-20T20:49:37+05:30","type":"agent_start","agent":"frontend-dev","task":"1","msg":"Scaffold Next.js, tokens, theme, layout"}
+{"ts":"2026-10-20T20:57:36+05:30","type":"test","agent":"tester","counts":{"passed":8,"failed":0},"msg":"Pipeline, LLM client and API route tests pass"}
+{"ts":"2026-10-20T20:57:36+05:30","type":"commit","agent":"backend-dev","task":"5","msg":"Agent pipeline, OpenAI-compatible LLM client, demo mode and streaming analyze API"}
+{"ts":"2026-10-20T20:57:36+05:30","type":"agent_start","agent":"ux-designer","task":"1-2","msg":"Design tokens, theme, landing page"}
+{"ts":"2026-10-20T21:06:32+05:30","type":"note","agent":"frontend-dev","task":"1-7","msg":"Landing, auth, dashboard, extraction and PDF report built; typecheck, lint and build pass"}
