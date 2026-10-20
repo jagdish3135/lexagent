@@ -10,14 +10,14 @@ const SANS = "'Segoe UI', Helvetica, Arial, sans-serif";
 
 const THEMES = {
   dark: {
-    bg: "#12110e", bg2: "#1a1814", card: "#1d1b16", line: "#3a352c", ink: "#efe8da", muted: "#a39a8a",
-    accent: "#ff6b4a", tile: "#efe8da", tileInk: "#12110e", chip: "#1d1b16",
-    agents: [["#93acff", "#1c2440"], ["#f2bd5c", "#2e2512"], ["#7fd492", "#152a1a"], ["#ff8a73", "#351a14"]],
+    bg: "#0a1a1c", bg2: "#0f2427", card: "#112a2d", line: "#234044", ink: "#e4f0ef", muted: "#8ea8a8",
+    accent: "#ff8a70", primary: "#4fc1be", tile: "#4fc1be", tileInk: "#062124", chip: "#112a2d",
+    agents: [["#8fb0ff", "#18284a"], ["#f3c065", "#2e2512"], ["#7fd69b", "#12301f"], ["#ff8e78", "#3a1a14"]],
   },
   light: {
-    bg: "#f4efe4", bg2: "#ebe4d4", card: "#fbf8f1", line: "#d3c9b5", ink: "#17140f", muted: "#6a6152",
-    accent: "#c63a1f", tile: "#17140f", tileInk: "#f4efe4", chip: "#fbf8f1",
-    agents: [["#2445b5", "#e2e7f6"], ["#9c5c07", "#f5e8cc"], ["#2c7140", "#dfeedd"], ["#b0301a", "#f6e0d9"]],
+    bg: "#f3f7f7", bg2: "#e4eeee", card: "#fbfdfd", line: "#cddddd", ink: "#0f2a2e", muted: "#587073",
+    accent: "#d4583f", primary: "#0e6a6f", tile: "#0e6a6f", tileInk: "#ffffff", chip: "#fbfdfd",
+    agents: [["#2f5bd3", "#e3eafb"], ["#a8690f", "#f8ecd2"], ["#2d7d4f", "#ddf0e3"], ["#c2412d", "#fbe3dd"]],
   },
 };
 
@@ -89,7 +89,7 @@ function banner(t) {
   <g clip-path="url(#clip)">
     <rect width="${W}" height="${H}" fill="url(#g)"/>
     <rect x="780" y="0" width="500" height="${H}" fill="url(#dots)" opacity="0.7"/>
-    <rect x="0" y="${H - 8}" width="${W}" height="1.5" fill="${t.ink}"/><rect x="0" y="${H - 4}" width="${W}" height="1.5" fill="${t.ink}"/>
+    <rect x="0" y="${H - 8}" width="${W}" height="1.5" fill="${t.primary}"/><rect x="0" y="${H - 4}" width="${W}" height="1.5" fill="${t.primary}"/>
   </g>
   ${mark(72, 84, 72, t)}
   <text x="164" y="140" font-family="${SERIF}" font-size="66" fill="${t.ink}">Lex<tspan font-style="italic" fill="${t.accent}">Agent</tspan></text>
@@ -127,7 +127,7 @@ function pipeline(t) {
     .join("\n");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="LexAgent pipeline: document to two parallel agents, a cross-verifier, a chief analyst and a PDF report">
-  <rect width="${W}" height="${H}" fill="${t.bg}" stroke="${t.ink}" stroke-width="2"/>
+  <rect width="${W}" height="${H}" fill="${t.bg}" stroke="${t.primary}" stroke-width="2"/>
   ${wireSvg}
 
   <g transform="translate(40 160)">
@@ -151,7 +151,7 @@ function pipeline(t) {
 
   <g transform="translate(1010 165)">
     <rect width="150" height="140" fill="${t.tile}"/>
-    <text x="75" y="64" text-anchor="middle" font-family="${SANS}" font-size="30" font-weight="800" fill="${t.accent}">PDF</text>
+    <text x="75" y="64" text-anchor="middle" font-family="${SANS}" font-size="30" font-weight="800" fill="${t.tileInk}">PDF</text>
     <text x="75" y="92" text-anchor="middle" font-family="${SANS}" font-size="12.5" font-weight="700" letter-spacing="2" fill="${t.tileInk}" opacity="0.85">REPORT</text>
     <text x="75" y="114" text-anchor="middle" font-family="${SANS}" font-size="11" fill="${t.tileInk}" opacity="0.6">with LexAgent seal</text>
   </g>

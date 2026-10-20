@@ -3,8 +3,8 @@ import Link from "next/link";
 export function LogoMark({ size = 34 }: { size?: number }) {
   return (
     <svg className="logo-mark" width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
-      <rect width="64" height="64" fill="var(--ink)" />
-      <g fill="none" stroke="var(--paper)" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="64" height="64" fill="var(--primary)" />
+      <g fill="none" stroke="var(--on-primary)" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M32 14v34M22 48h20M18 22h28" />
         <path d="M18 22l-7 14h14zM46 22l-7 14h14z" />
       </g>

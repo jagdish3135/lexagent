@@ -1,4 +1,5 @@
 import type { ChatJson } from "./llm";
+import { LANGS, type Lang, type Role } from "./locale";
 import {
   comparisonSchema,
   finalSchema,
@@ -36,14 +37,44 @@ Schema: {"overview": string (one paragraph), "keyFindings": string[] (4-6), "sid
 
 export type Emit = (event: StreamEvent) => void;
 
+export interface Audience {
+  lang: Lang;
+  role: Role;
+}
+
+const READER: Record<Role, string> = {
+  citizen: "a citizen with no legal training. Use very simple words and explain every legal term the first time you use it.",
+  student: "a law student. Explain the legal reasoning and name the doctrines and presumptions involved.",
+  advocate: "a practising advocate. Be precise and concise; focus on issues, evidence on record and procedure.",
+  judge: "a judge. Be neutral and concise; focus on the issues, the evidence on record and the applicable law.",
+  researcher: "a legal researcher. Be thorough and well structured.",
+};
+
+/** Who reads the result and in which language. Added to every agent's instructions. */
+export function audienceRules({ lang, role }: Audience): string {
+  const language =
+    lang === "en"
+      ? "Write every text value in English."
+      : `Write every text value in ${LANGS.find((l) => l.id === lang)!.name} (Devanagari script). Keep names of Acts, section numbers, case numbers and party names as they appear in the document. Keep JSON keys, and the confidence value (High, Medium or Low), in English.`;
+  return `
+The reader is ${READER[role]}
+${language}`;
+}
+
 const caseBlock = (text: string) => `<case>\n${text}\n</case>`;
 
 /**
  * Runs the four agents. Summarizer and Legal Analyst read the case independently and in parallel,
  * the Cross-Verifier compares their outputs, and the Chief Analyst writes the final analysis.
  */
-export async function runPipeline(caseText: string, chat: ChatJson, emit: Emit): Promise<AgentOutputs> {
+export async function runPipeline(
+  caseText: string,
+  chat: ChatJson,
+  emit: Emit,
+  audience: Audience = { lang: "en", role: "citizen" },
+): Promise<AgentOutputs> {
   const out: AgentOutputs = {};
+  const rules = audienceRules(audience);
 
   const step = async <T>(agent: AgentId, run: () => Promise<T>): Promise<T | undefined> => {
     emit({ type: "status", agent, status: "working" });
@@ -58,8 +89,8 @@ export async function runPipeline(caseText: string, chat: ChatJson, emit: Emit):
   };
 
   const [summary, insights] = await Promise.all([
-    step("summarizer", async () => summarySchema.parse(await chat(SUMMARIZER, caseBlock(caseText)))),
-    step("analyst", async () => insightsSchema.parse(await chat(ANALYST, caseBlock(caseText)))),
+    step("summarizer", async () => summarySchema.parse(await chat(SUMMARIZER + rules, caseBlock(caseText)))),
+    step("analyst", async () => insightsSchema.parse(await chat(ANALYST + rules, caseBlock(caseText)))),
   ]);
   out.summarizer = summary;
   out.analyst = insights;
@@ -73,13 +104,13 @@ export async function runPipeline(caseText: string, chat: ChatJson, emit: Emit):
 
   const readings = `Agent A (Summarizer) output:\n${JSON.stringify(summary)}\n\nAgent B (Legal Analyst) output:\n${JSON.stringify(insights)}`;
   out.verifier = await step("verifier", async () =>
-    comparisonSchema.parse(await chat(VERIFIER, `${caseBlock(caseText)}\n\n${readings}`)),
+    comparisonSchema.parse(await chat(VERIFIER + rules, `${caseBlock(caseText)}\n\n${readings}`)),
   );
 
   out.chief = await step("chief", async () =>
     finalSchema.parse(
       await chat(
-        CHIEF,
+        CHIEF + rules,
         `${readings}\n\nCross-Verifier output:\n${JSON.stringify(out.verifier ?? "not available")}`,
       ),
     ),

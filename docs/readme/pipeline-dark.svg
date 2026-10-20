@@ -1,68 +1,68 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-label="LexAgent pipeline: document to two parallel agents, a cross-verifier, a chief analyst and a PDF report">
-  <rect width="1200" height="470" fill="#12110e" stroke="#efe8da" stroke-width="2"/>
-  <path d="M200 235 C 250 235, 250 120, 300 120" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-    <circle r="6" fill="#93acff"><animateMotion dur="2.2s" begin="0s" repeatCount="indefinite" path="M200 235 C 250 235, 250 120, 300 120"/></circle>
-<path d="M200 235 C 250 235, 250 350, 300 350" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-    <circle r="6" fill="#f2bd5c"><animateMotion dur="2.2s" begin="0.25s" repeatCount="indefinite" path="M200 235 C 250 235, 250 350, 300 350"/></circle>
-<path d="M560 120 C 610 120, 600 235, 650 235" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-    <circle r="6" fill="#93acff"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M560 120 C 610 120, 600 235, 650 235"/></circle>
-<path d="M560 350 C 610 350, 600 235, 650 235" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-    <circle r="6" fill="#f2bd5c"><animateMotion dur="2.2s" begin="1.35s" repeatCount="indefinite" path="M560 350 C 610 350, 600 235, 650 235"/></circle>
+  <rect width="1200" height="470" fill="#0a1a1c" stroke="#4fc1be" stroke-width="2"/>
+  <path d="M200 235 C 250 235, 250 120, 300 120" fill="none" stroke="#234044" stroke-width="2.5"/>
+    <circle r="6" fill="#8fb0ff"><animateMotion dur="2.2s" begin="0s" repeatCount="indefinite" path="M200 235 C 250 235, 250 120, 300 120"/></circle>
+<path d="M200 235 C 250 235, 250 350, 300 350" fill="none" stroke="#234044" stroke-width="2.5"/>
+    <circle r="6" fill="#f3c065"><animateMotion dur="2.2s" begin="0.25s" repeatCount="indefinite" path="M200 235 C 250 235, 250 350, 300 350"/></circle>
+<path d="M560 120 C 610 120, 600 235, 650 235" fill="none" stroke="#234044" stroke-width="2.5"/>
+    <circle r="6" fill="#8fb0ff"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M560 120 C 610 120, 600 235, 650 235"/></circle>
+<path d="M560 350 C 610 350, 600 235, 650 235" fill="none" stroke="#234044" stroke-width="2.5"/>
+    <circle r="6" fill="#f3c065"><animateMotion dur="2.2s" begin="1.35s" repeatCount="indefinite" path="M560 350 C 610 350, 600 235, 650 235"/></circle>
 
   <g transform="translate(40 160)">
-    <rect width="160" height="150" fill="#1d1b16" stroke="#3a352c" stroke-width="1.5"/>
-    <text x="22" y="40" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="#ff6b4a">CASE FILE</text>
-    <rect x="22" y="58" width="116" height="8" rx="4" fill="#3a352c"/><rect x="22" y="76" width="116" height="8" rx="4" fill="#3a352c"/><rect x="22" y="94" width="116" height="8" rx="4" fill="#3a352c"/><rect x="22" y="112" width="70" height="8" rx="4" fill="#3a352c"/>
-    <text x="80" y="176" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#a39a8a">PDF · DOCX · TXT</text>
+    <rect width="160" height="150" fill="#112a2d" stroke="#234044" stroke-width="1.5"/>
+    <text x="22" y="40" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="2" fill="#ff8a70">CASE FILE</text>
+    <rect x="22" y="58" width="116" height="8" rx="4" fill="#234044"/><rect x="22" y="76" width="116" height="8" rx="4" fill="#234044"/><rect x="22" y="94" width="116" height="8" rx="4" fill="#234044"/><rect x="22" y="112" width="70" height="8" rx="4" fill="#234044"/>
+    <text x="80" y="176" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="600" fill="#8ea8a8">PDF · DOCX · TXT</text>
   </g>
 
-  <text x="430" y="242" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2.5" fill="#a39a8a">IN PARALLEL</text>
-  <path d="M430 160 L430 220 M430 255 L430 312" stroke="#3a352c" stroke-width="2" stroke-dasharray="5 6"/>
+  <text x="430" y="242" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2.5" fill="#8ea8a8">IN PARALLEL</text>
+  <path d="M430 160 L430 220 M430 255 L430 312" stroke="#234044" stroke-width="2" stroke-dasharray="5 6"/>
 
   <g transform="translate(300 80)">
-      <rect width="260" height="80" fill="#1d1b16" stroke="#3a352c" stroke-width="1.5"/>
-      <rect width="5" height="80" fill="#93acff"/>
-      <circle cx="34" cy="43" r="17" fill="#1c2440"/>
-      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#93acff">1</text>
-      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#efe8da">Summarizer</text>
-      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#a39a8a">Plain-language summary</text>
+      <rect width="260" height="80" fill="#112a2d" stroke="#234044" stroke-width="1.5"/>
+      <rect width="5" height="80" fill="#8fb0ff"/>
+      <circle cx="34" cy="43" r="17" fill="#18284a"/>
+      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#8fb0ff">1</text>
+      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#e4f0ef">Summarizer</text>
+      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#8ea8a8">Plain-language summary</text>
     </g>
   <g transform="translate(300 310)">
-      <rect width="260" height="80" fill="#1d1b16" stroke="#3a352c" stroke-width="1.5"/>
-      <rect width="5" height="80" fill="#f2bd5c"/>
+      <rect width="260" height="80" fill="#112a2d" stroke="#234044" stroke-width="1.5"/>
+      <rect width="5" height="80" fill="#f3c065"/>
       <circle cx="34" cy="43" r="17" fill="#2e2512"/>
-      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#f2bd5c">2</text>
-      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#efe8da">Legal Analyst</text>
-      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#a39a8a">Facts · issues · Acts &amp; sections</text>
+      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#f3c065">2</text>
+      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#e4f0ef">Legal Analyst</text>
+      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#8ea8a8">Facts · issues · Acts &amp; sections</text>
     </g>
   <g transform="translate(650 195)">
-      <rect width="240" height="80" fill="#1d1b16" stroke="#3a352c" stroke-width="1.5"/>
-      <rect width="5" height="80" fill="#7fd492"/>
-      <circle cx="34" cy="43" r="17" fill="#152a1a"/>
-      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#7fd492">3</text>
-      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#efe8da">Cross-Verifier</text>
-      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#a39a8a">Agreements · gaps · confidence</text>
+      <rect width="240" height="80" fill="#112a2d" stroke="#234044" stroke-width="1.5"/>
+      <rect width="5" height="80" fill="#7fd69b"/>
+      <circle cx="34" cy="43" r="17" fill="#12301f"/>
+      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#7fd69b">3</text>
+      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#e4f0ef">Cross-Verifier</text>
+      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#8ea8a8">Agreements · gaps · confidence</text>
     </g>
-  <path d="M770 275 L770 345" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-  <circle r="6" fill="#7fd492"><animateMotion dur="1.6s" begin="2.4s" repeatCount="indefinite" path="M770 275 L770 345"/></circle>
+  <path d="M770 275 L770 345" fill="none" stroke="#234044" stroke-width="2.5"/>
+  <circle r="6" fill="#7fd69b"><animateMotion dur="1.6s" begin="2.4s" repeatCount="indefinite" path="M770 275 L770 345"/></circle>
   <g transform="translate(650 345)">
-      <rect width="240" height="80" fill="#1d1b16" stroke="#3a352c" stroke-width="1.5"/>
-      <rect width="5" height="80" fill="#ff8a73"/>
-      <circle cx="34" cy="43" r="17" fill="#351a14"/>
-      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#ff8a73">4</text>
-      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#efe8da">Chief Analyst</text>
-      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#a39a8a">Final structured analysis</text>
+      <rect width="240" height="80" fill="#112a2d" stroke="#234044" stroke-width="1.5"/>
+      <rect width="5" height="80" fill="#ff8e78"/>
+      <circle cx="34" cy="43" r="17" fill="#3a1a14"/>
+      <text x="34" y="49" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#ff8e78">4</text>
+      <text x="62" y="39" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#e4f0ef">Chief Analyst</text>
+      <text x="62" y="59" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#8ea8a8">Final structured analysis</text>
     </g>
-  <path d="M890 385 C 960 385, 950 235, 1010 235" fill="none" stroke="#3a352c" stroke-width="2.5"/>
-  <circle r="6" fill="#ff8a73"><animateMotion dur="1.8s" begin="3s" repeatCount="indefinite" path="M890 385 C 960 385, 950 235, 1010 235"/></circle>
+  <path d="M890 385 C 960 385, 950 235, 1010 235" fill="none" stroke="#234044" stroke-width="2.5"/>
+  <circle r="6" fill="#ff8e78"><animateMotion dur="1.8s" begin="3s" repeatCount="indefinite" path="M890 385 C 960 385, 950 235, 1010 235"/></circle>
 
   <g transform="translate(1010 165)">
-    <rect width="150" height="140" fill="#efe8da"/>
-    <text x="75" y="64" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#ff6b4a">PDF</text>
-    <text x="75" y="92" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="#12110e" opacity="0.85">REPORT</text>
-    <text x="75" y="114" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#12110e" opacity="0.6">with LexAgent seal</text>
+    <rect width="150" height="140" fill="#4fc1be"/>
+    <text x="75" y="64" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#062124">PDF</text>
+    <text x="75" y="92" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="#062124" opacity="0.85">REPORT</text>
+    <text x="75" y="114" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" fill="#062124" opacity="0.6">with LexAgent seal</text>
   </g>
 
-  <text x="40" y="58" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#efe8da">How a case moves through LexAgent</text>
-  <text x="40" y="448" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#a39a8a">Each agent's result streams to the dashboard the moment it finishes · decision support only, never a verdict</text>
+  <text x="40" y="58" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#e4f0ef">How a case moves through LexAgent</text>
+  <text x="40" y="448" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#8ea8a8">Each agent's result streams to the dashboard the moment it finishes · decision support only, never a verdict</text>
 </svg>

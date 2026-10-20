@@ -4,11 +4,16 @@
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
 export const ACCEPT = ".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain";
 
-export class ExtractError extends Error {}
+/** `code` is a translation key for the message shown to the user. */
+export class ExtractError extends Error {
+  constructor(public code: "err.tooBig" | "err.doc" | "err.type" | "err.scanned" | "err.emptyFile") {
+    super(code);
+  }
+}
 
 export async function extractText(file: File): Promise<string> {
   const name = file.name.toLowerCase();
-  if (file.size > MAX_FILE_BYTES) throw new ExtractError("This file is larger than 10 MB. Please upload a smaller file.");
+  if (file.size > MAX_FILE_BYTES) throw new ExtractError("err.tooBig");
 
   let text: string;
   if (name.endsWith(".txt")) {
@@ -19,18 +24,14 @@ export async function extractText(file: File): Promise<string> {
     const mammoth = await import("mammoth");
     text = (await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() })).value;
   } else if (name.endsWith(".doc")) {
-    throw new ExtractError("Old .doc files are not supported. Open it in Word and save it as .docx or PDF.");
+    throw new ExtractError("err.doc");
   } else {
-    throw new ExtractError("Unsupported file type. Upload a PDF, DOCX or TXT file.");
+    throw new ExtractError("err.type");
   }
 
   const clean = text.replace(/\r\n/g, "\n").replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
   if (!clean) {
-    throw new ExtractError(
-      name.endsWith(".pdf")
-        ? "No text found. This looks like a scanned PDF (an image). Try a text-based PDF or paste the text."
-        : "This file has no readable text.",
-    );
+    throw new ExtractError(name.endsWith(".pdf") ? "err.scanned" : "err.emptyFile");
   }
   return clean;
 }

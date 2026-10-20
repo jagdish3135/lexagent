@@ -2,6 +2,7 @@ import { runPipeline } from "@/lib/agents";
 import { demoChat } from "@/lib/demo";
 import { configFromEnv, createChatJson } from "@/lib/llm";
 import { allow } from "@/lib/rate-limit";
+import { isLang, isRole } from "@/lib/locale";
 import type { StreamEvent } from "@/lib/schemas";
 
 export const runtime = "nodejs";
@@ -23,7 +24,9 @@ export async function POST(req: Request) {
   } catch {
     return json(400, "Send JSON like {\"text\": \"...\"}");
   }
-  const raw = typeof (body as { text?: unknown })?.text === "string" ? (body as { text: string }).text : "";
+  const input = (body ?? {}) as { text?: unknown; language?: unknown; role?: unknown };
+  const raw = typeof input.text === "string" ? input.text : "";
+  const audience = { lang: isLang(input.language) ? input.language : "en", role: isRole(input.role) ? input.role : "citizen" } as const;
   const text = raw.replace(/\u0000/g, "").trim();
   if (text.length < MIN_CHARS) {
     return json(400, `The case text is too short. Add at least ${MIN_CHARS} characters so the agents have something to read.`);
@@ -53,7 +56,7 @@ export async function POST(req: Request) {
       };
       emit({ type: "meta", mode: cfg ? "live" : "demo", model: cfg?.model ?? "demo", truncated, chars: caseText.length });
       try {
-        await runPipeline(caseText, chat, emit);
+        await runPipeline(caseText, chat, emit, audience);
         emit({ type: "end" });
       } catch {
         emit({ type: "error", error: "The analysis stopped unexpectedly. Please try again." });

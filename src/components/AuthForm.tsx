@@ -3,13 +3,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { EMAIL_RE, logIn, signUp } from "@/lib/auth";
+import { useLang, type Key } from "@/lib/i18n";
+import { ROLES, isRole, type Role } from "@/lib/locale";
+import { LangSwitch } from "./LangSwitch";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
-type Errors = Partial<Record<"name" | "email" | "password" | "form", string>>;
+type Field = "name" | "email" | "password";
+type Errors = Partial<Record<Field | "form", Key>>;
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const router = useRouter();
+  const { t } = useLang();
   const [errors, setErrors] = useState<Errors>({});
   const [busy, setBusy] = useState(false);
   const isSignup = mode === "signup";
@@ -20,24 +25,26 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
     const name = String(data.get("name") ?? "");
     const email = String(data.get("email") ?? "");
     const password = String(data.get("password") ?? "");
+    const roleRaw = data.get("role");
+    const role: Role = isRole(roleRaw) ? roleRaw : "citizen";
 
     const next: Errors = {};
-    if (isSignup && name.trim().length < 2) next.name = "Enter your name.";
-    if (!EMAIL_RE.test(email.trim())) next.email = "Enter a valid email address.";
-    if (password.length < 6) next.password = "Use at least 6 characters.";
+    if (isSignup && name.trim().length < 2) next.name = "err.name";
+    if (!EMAIL_RE.test(email.trim())) next.email = "err.email";
+    if (password.length < 6) next.password = "err.password";
     setErrors(next);
     if (Object.keys(next).length) return;
 
     setBusy(true);
-    const error = isSignup ? await signUp(name, email, password) : await logIn(email, password);
+    const error = isSignup ? await signUp(name, email, password, role) : await logIn(email, password);
     setBusy(false);
-    if (error) setErrors({ form: error });
+    if (error) setErrors({ form: error === "exists" ? "err.exists" : "err.wrong" });
     else router.push("/dashboard");
   }
 
-  const field = (id: "name" | "email" | "password", label: string, type: string, autoComplete: string) => (
+  const field = (id: Field, label: Key, type: string, autoComplete: string) => (
     <div className="field">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>{t(label)}</label>
       <input
         id={id}
         name={id}
@@ -50,7 +57,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       />
       {errors[id] && (
         <span id={`${id}-error`} className="field-error">
-          {errors[id]}
+          {t(errors[id])}
         </span>
       )}
     </div>
@@ -61,7 +68,10 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <header className="site-header">
         <div className="container">
           <Logo />
-          <ThemeToggle />
+          <div className="header-actions">
+            <LangSwitch />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
       <main className="auth-split" id="main">
@@ -73,53 +83,54 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
             <blockquote>
               The State shall secure that the operation of the legal system promotes justice, on a basis of equal opportunity.
             </blockquote>
-            <cite>Constitution of India · Equal justice and free legal aid</cite>
+            <cite>{t("auth.cite")}</cite>
           </div>
           <div className="art-foot">
-            <span>Summarizer</span>
-            <span>Legal Analyst</span>
-            <span>Cross-Verifier</span>
-            <span>Chief Analyst</span>
+            {(["summarizer", "analyst", "verifier", "chief"] as const).map((a) => (
+              <span key={a}>{t(`agent.${a}` as Key)}</span>
+            ))}
           </div>
         </aside>
         <div className="auth-wrap">
           <div className="auth-card">
-            <span className="kicker">{isSignup ? "Form 1 · New registration" : "Form 2 · Appearance"}</span>
+            <span className="kicker">{t(isSignup ? "auth.signup.kicker" : "auth.login.kicker")}</span>
             <h1>
-              {isSignup ? (
-                <>
-                  Open your <em>docket</em>.
-                </>
-              ) : (
-                <>
-                  Return to your <em>desk</em>.
-                </>
-              )}
+              {t(isSignup ? "auth.signup.h1a" : "auth.login.h1a")} <em>{t(isSignup ? "auth.signup.h1em" : "auth.login.h1em")}</em>
             </h1>
-            <p className="sub">
-              {isSignup ? "One minute to sign up, then file your first case." : "Log in to pick up where you left off."}
-            </p>
+            <p className="sub">{t(isSignup ? "auth.signup.sub" : "auth.login.sub")}</p>
             <form onSubmit={onSubmit} noValidate>
               {errors.form && (
                 <p className="form-error" role="alert">
-                  {errors.form}
+                  {t(errors.form)}
                 </p>
               )}
-              {isSignup && field("name", "Full name", "text", "name")}
-              {field("email", "Email", "email", "email")}
-              {field("password", "Password", "password", isSignup ? "new-password" : "current-password")}
+              {isSignup && field("name", "auth.name", "text", "name")}
+              {field("email", "auth.email", "email", "email")}
+              {field("password", "auth.password", "password", isSignup ? "new-password" : "current-password")}
+              {isSignup && (
+                <fieldset className="roles">
+                  <legend>{t("auth.role")}</legend>
+                  {ROLES.map((r, n) => (
+                    <label key={r} className="role-opt">
+                      <input type="radio" name="role" value={r} defaultChecked={n === 0} />
+                      <b>{t(`role.${r}` as Key)}</b>
+                      <span>{t(`role.${r}.d` as Key)}</span>
+                    </label>
+                  ))}
+                </fieldset>
+              )}
               <button className="btn btn-primary" style={{ width: "100%", marginTop: 8 }} disabled={busy}>
                 {busy && <span className="spinner" aria-hidden="true" />}
-                {isSignup ? "Create account" : "Log in"}
+                {t(isSignup ? "auth.create" : "auth.login")}
               </button>
             </form>
             <p className="auth-switch">
-              {isSignup ? "Already registered? " : "New to LexAgent? "}
+              {t(isSignup ? "auth.haveAccount" : "auth.newHere")}{" "}
               <Link href={isSignup ? "/login" : "/signup"} className="text-link">
-                {isSignup ? "Log in" : "Create an account"}
+                {t(isSignup ? "auth.login" : "auth.toSignup")}
               </Link>
             </p>
-            <p className="demo-note">Demo sign-in: accounts are saved only in this browser and are not real accounts yet.</p>
+            <p className="demo-note">{t("auth.demo")}</p>
           </div>
         </div>
       </main>

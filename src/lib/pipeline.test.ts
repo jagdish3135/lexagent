@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { runPipeline } from "./agents";
+import { audienceRules, runPipeline } from "./agents";
 import { createChatJson, parseJsonReply } from "./llm";
 import { SAMPLES } from "./samples";
 import type { StreamEvent } from "./schemas";
@@ -79,6 +79,19 @@ describe("runPipeline", () => {
     expect(statuses).toContain("analyst:failed");
     expect(statuses).toContain("verifier:skipped");
     expect(statuses).toContain("chief:skipped");
+  });
+});
+
+describe("audience", () => {
+  it("tells every agent the reader and the output language", async () => {
+    const systems: string[] = [];
+    await runPipeline("case", async (system) => (systems.push(system), {}), () => {}, { lang: "hi", role: "advocate" });
+    expect(systems).toHaveLength(4);
+    for (const s of systems) {
+      expect(s).toContain("practising advocate");
+      expect(s).toContain("Hindi (Devanagari script)");
+    }
+    expect(audienceRules({ lang: "en", role: "citizen" })).toContain("Write every text value in English.");
   });
 });
 

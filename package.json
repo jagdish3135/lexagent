@@ -13,9 +13,11 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "postinstall": "node scripts/copy-pdf-worker.mjs"
+    "postinstall": "node scripts/postinstall.mjs",
+    "samples": "tsx scripts/make-sample-cases.tsx"
   },
   "dependencies": {
+    "@expo-google-fonts/noto-sans-devanagari": "0.4.1",
     "@react-pdf/renderer": "4.9.0",
     "mammoth": "1.13.0",
     "next": "16.4.2",
@@ -31,6 +33,7 @@
     "eslint": "10.13.0",
     "eslint-config-next": "16.4.2",
     "playwright": "1.64.1",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
     "vitest": "5.0.5"
   }

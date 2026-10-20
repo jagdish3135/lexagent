@@ -1,5 +1,6 @@
 "use client";
 import { readKey, useStoredKey, writeKey } from "./client-store";
+import { isRole, type Role } from "./locale";
 
 // DEMO AUTH ONLY. Accounts live in this browser's localStorage; nothing is sent to a server.
 // Replace with a real auth provider before storing anything sensitive.
@@ -9,6 +10,7 @@ const SESSION = "lexagent.session";
 export interface Session {
   name: string;
   email: string;
+  role: Role;
 }
 
 interface StoredUser extends Session {
@@ -31,21 +33,23 @@ function users(): StoredUser[] {
   }
 }
 
-export async function signUp(name: string, email: string, password: string): Promise<string | null> {
+/** Returns null on success, or an error code the UI translates. */
+export async function signUp(name: string, email: string, password: string, role: Role): Promise<"exists" | null> {
   const e = email.trim().toLowerCase();
   const all = users();
-  if (all.some((u) => u.email === e)) return "An account with this email already exists. Log in instead.";
-  all.push({ name: name.trim(), email: e, hash: await hash(e, password) });
+  if (all.some((u) => u.email === e)) return "exists";
+  const session: Session = { name: name.trim(), email: e, role };
+  all.push({ ...session, hash: await hash(e, password) });
   writeKey(USERS, JSON.stringify(all));
-  writeKey(SESSION, JSON.stringify({ name: name.trim(), email: e }));
+  writeKey(SESSION, JSON.stringify(session));
   return null;
 }
 
-export async function logIn(email: string, password: string): Promise<string | null> {
+export async function logIn(email: string, password: string): Promise<"wrong" | null> {
   const e = email.trim().toLowerCase();
   const user = users().find((u) => u.email === e);
-  if (!user || user.hash !== (await hash(e, password))) return "Email or password is incorrect.";
-  writeKey(SESSION, JSON.stringify({ name: user.name, email: user.email }));
+  if (!user || user.hash !== (await hash(e, password))) return "wrong";
+  writeKey(SESSION, JSON.stringify({ name: user.name, email: user.email, role: user.role }));
   return null;
 }
 
@@ -59,7 +63,8 @@ export function useSession(): Session | null | undefined {
   if (raw === undefined) return undefined;
   if (raw === null) return null;
   try {
-    return JSON.parse(raw) as Session;
+    const s = JSON.parse(raw) as Session;
+    return { ...s, role: isRole(s.role) ? s.role : "citizen" }; // accounts made before roles existed
   } catch {
     return null;
   }

@@ -1,31 +1,13 @@
+"use client";
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { CaseFile } from "@/components/CaseFile";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { useLang, type Key } from "@/lib/i18n";
 import { AGENTS } from "@/lib/schemas";
 
 const i = (n: number) => ({ "--i": n }) as CSSProperties;
-
-const files: Record<string, string[]> = {
-  summarizer: ["Plain-language story", "Parties", "Timeline"],
-  analyst: ["Key facts", "Issues for the court", "Arguments", "Acts & sections"],
-  verifier: ["Agreements", "Differences", "Inconsistencies", "Confidence"],
-  chief: ["Key findings", "Strengths & weaknesses", "Open questions", "Next steps"],
-};
-
-const stages = [
-  { n: "i.", label: "Filing", title: "Upload the case", text: "Drop a PDF, Word (.docx) or text file, or paste a judgment, FIR, complaint or petition. Text is read in your browser; the file never leaves it." },
-  { n: "ii.", label: "Hearing", title: "Four agents read it", text: "Two agents read independently. A third cross-examines their readings against the document. A fourth writes the brief." },
-  { n: "iii.", label: "Order", title: "Take the report", text: "Export a typeset PDF with the LexAgent seal, ready for your advocate, your client, or your study group." },
-];
-
-const readers = [
-  { who: "Citizens", line: "“What does this notice actually say about me?”" },
-  { who: "Law students", line: "“Which issues did the court have to decide?”" },
-  { who: "Advocates", line: "“Give me the first read of this 40-page file.”" },
-  { who: "Judges & researchers", line: "“Summarise the docket before the hearing.”" },
-];
 
 const statutes = [
   "Bharatiya Nyaya Sanhita, 2023",
@@ -41,6 +23,18 @@ const statutes = [
 ];
 
 export default function Home() {
+  const { t } = useLang();
+  const stages = [1, 2, 3].map((n) => ({
+    n: ["i.", "ii.", "iii."][n - 1],
+    label: t(`stage${n}.label` as Key),
+    title: t(`stage${n}.title` as Key),
+    text: t(`stage${n}.text` as Key),
+  }));
+  const readers = (["citizen", "student", "advocate", "judge"] as const).map((r) => ({
+    who: t(`reader.${r}` as Key),
+    line: t(`reader.${r}.q` as Key),
+  }));
+
   return (
     <>
       <SiteHeader />
@@ -49,41 +43,37 @@ export default function Home() {
           <div className="container">
             <div>
               <span className="kicker rise" style={i(0)}>
-                In re: the pile of case files on your desk
+                {t("hero.kicker")}
               </span>
               <h1 className="rise" style={i(1)}>
-                Four minds read the case. <em>You</em> read the <span className="strike">file</span> brief.
+                {t("hero.h1")} <em>{t("hero.you")}</em> {t("hero.mid")} <span className="strike">{t("hero.file")}</span>{" "}
+                {t("hero.end")}
               </h1>
               <p className="lede rise" style={i(2)}>
-                LexAgent reads long Indian legal documents with four AI agents that check each other&apos;s work, then hands
-                you a plain summary, the law that applies, a cross-examination of both readings and a final analysis, typeset
-                as a PDF.
+                {t("hero.lede")}
               </p>
               <div className="hero-cta rise" style={i(3)}>
                 <Link href="/signup" className="btn btn-primary">
-                  File your first case →
+                  {t("hero.cta")}
                 </Link>
                 <a href="/sample-report.pdf" className="text-link" target="_blank" rel="noopener">
-                  Read a sample report
+                  {t("hero.sample")}
                 </a>
               </div>
               <div className="ledger rise" style={i(4)}>
-                <div>
-                  <b>4</b>
-                  <span>Agents on the bench</span>
-                </div>
-                <div>
-                  <b>2</b>
-                  <span>Independent readings</span>
-                </div>
-                <div>
-                  <b>1</b>
-                  <span>Cross-examination</span>
-                </div>
-                <div>
-                  <b>0</b>
-                  <span>Verdicts. Ever.</span>
-                </div>
+                {(
+                  [
+                    ["4", "ledger.agents"],
+                    ["2", "ledger.readings"],
+                    ["1", "ledger.cross"],
+                    ["0", "ledger.verdicts"],
+                  ] as const
+                ).map(([n, k]) => (
+                  <div key={k}>
+                    <b>{n}</b>
+                    <span>{t(k)}</span>
+                  </div>
+                ))}
               </div>
             </div>
             <CaseFile />
@@ -109,21 +99,20 @@ export default function Home() {
           <div className="container">
             <div className="section-head">
               <div>
-                <span className="kicker">The proceedings</span>
+                <span className="kicker">{t("proc.kicker")}</span>
                 <h2>
-                  From a forty-page file to a <em>two-page</em> brief.
+                  {t("proc.h2a")} <em>{t("proc.h2em")}</em> {t("proc.h2b")}
                 </h2>
               </div>
-              <p>
-                India&apos;s courts carry a backlog of crores of cases, and every one of them begins with someone reading a long
-                document. LexAgent does the first reading, so you can start from understanding.
-              </p>
+              <p>{t("proc.p")}</p>
             </div>
             <div className="stages">
               {stages.map((s) => (
                 <article className="stage" key={s.n}>
                   <div className="numeral">{s.n}</div>
-                  <span className="mono muted">Stage · {s.label}</span>
+                  <span className="mono muted">
+                    {t("stage")} · {s.label}
+                  </span>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
                 </article>
@@ -136,26 +125,25 @@ export default function Home() {
           <div className="container">
             <div className="section-head">
               <div>
-                <span className="kicker">The bench of four</span>
+                <span className="kicker">{t("bench.kicker")}</span>
                 <h2>
-                  One AI can be confidently wrong. <em>Four</em> keep each other honest.
+                  {t("bench.h2a")} <em>{t("bench.h2em")}</em> {t("bench.h2b")}
                 </h2>
               </div>
-              <p>
-                Every agent works from the same document under the same rules: ground every point in the text, never invent a
-                citation, never deliver a verdict, and know that BNS, BNSS and BSA replaced the IPC, CrPC and Evidence Act in 2024.
-              </p>
+              <p>{t("bench.p")}</p>
             </div>
             <div className="bench">
               {AGENTS.map((a, n) => (
                 <div className={`bench-row c-${a.color}`} key={a.id}>
                   <span className="no">{["i", "ii", "iii", "iv"][n]}</span>
-                  <h3>{a.name}</h3>
-                  <p>{a.role}.</p>
+                  <h3>{t(`agent.${a.id}` as Key)}</h3>
+                  <p>{t(`agent.${a.id}.role` as Key)}.</p>
                   <ul>
-                    {files[a.id]!.map((f) => (
-                      <li key={f}>{f}</li>
-                    ))}
+                    {t(`agent.${a.id}.files` as Key)
+                      .split("|")
+                      .map((f) => (
+                        <li key={f}>{f}</li>
+                      ))}
                   </ul>
                 </div>
               ))}
@@ -167,9 +155,9 @@ export default function Home() {
           <div className="container">
             <div className="section-head">
               <div>
-                <span className="kicker">Who reads with LexAgent</span>
+                <span className="kicker">{t("readers.kicker")}</span>
                 <h2>
-                  Built for everyone who has to <em>read</em> the law.
+                  {t("readers.h2a")} <em>{t("readers.h2em")}</em> {t("readers.h2b")}
                 </h2>
               </div>
             </div>
@@ -185,20 +173,19 @@ export default function Home() {
             <div className="verdict">
               <div className="big-stamp" aria-hidden="true">
                 <span>
-                  NOT A<big>judgment</big>LEXAGENT
+                  {t("verdict.stampTop")}
+                  <big>{t("verdict.stampBig")}</big>LEXAGENT
                 </span>
               </div>
               <div>
                 <h2>
-                  It assists understanding. It never replaces your <em>advocate</em>, or the court.
+                  {t("verdict.h2a")} <em>{t("verdict.h2em")}</em>
+                  {t("verdict.h2b")}
                 </h2>
-                <p>
-                  LexAgent gives no legal judgments or decisions. Verify every section and citation against the record, and
-                  consult a qualified advocate before you act.
-                </p>
+                <p>{t("verdict.p")}</p>
               </div>
               <Link href="/signup" className="btn">
-                Open your docket →
+                {t("verdict.cta")}
               </Link>
             </div>
           </div>
