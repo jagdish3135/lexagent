@@ -157,6 +157,7 @@ a {
   border-radius: 10px;
   border: 1px solid transparent;
   font: 600 15px/1 var(--font-body);
+  white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
@@ -227,12 +228,9 @@ a {
 .logo-mark {
   flex: none;
 }
-.hide-sm {
-  display: none;
-}
-@media (min-width: 640px) {
+@media (max-width: 639px) {
   .hide-sm {
-    display: inline-flex;
+    display: none !important;
   }
 }
 
@@ -603,12 +601,16 @@ a {
 }
 .dash-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
+.dash-grid > * {
+  min-width: 0;
+}
 @media (min-width: 1000px) {
   .dash-grid {
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 400px minmax(0, 1fr);
   }
   .input-panel {
     position: sticky;
@@ -733,7 +735,7 @@ a {
 .progress-row {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
 }
 .agent-chip {
   display: flex;
@@ -776,6 +778,7 @@ a {
   font-weight: 700;
   font-size: 14px;
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 .agent-chip .st {
   font-size: 12px;
@@ -895,12 +898,18 @@ a {
 }
 .cols {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 @media (min-width: 720px) {
   .cols {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+.result-body > *,
+.cols > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .subcard {
   padding: 14px;
@@ -919,7 +928,7 @@ a {
 }
 .timeline li {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 96px minmax(0, 1fr);
   gap: 12px;
   padding: 8px 0 8px 16px;
   border-left: 2px solid var(--c-soft);
