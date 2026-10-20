@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type DragEvent } from "react";
 import { Logo, ScalesIcon } from "@/components/Logo";
 import { ComparisonCard, FinalCard, InsightsCard, SkeletonCard, SummaryCard } from "@/components/Results";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Dateline } from "@/components/SiteHeader";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { logOut, useSession } from "@/lib/auth";
 import { ACCEPT, ExtractError, extractText } from "@/lib/extract";
@@ -21,6 +22,7 @@ import {
 } from "@/lib/schemas";
 
 const MIN_CHARS = 200;
+const ROMAN = ["i", "ii", "iii", "iv"];
 const idle = (): Record<AgentId, AgentStatus> => ({ summarizer: "waiting", analyst: "waiting", verifier: "waiting", chief: "waiting" });
 const STATUS_TEXT: Record<AgentStatus, string> = {
   waiting: "Waiting",
@@ -151,12 +153,13 @@ export default function Dashboard() {
 
   return (
     <>
+      <Dateline right={`Desk of ${session.name}`} />
       <header className="site-header">
         <div className="container">
           <Logo href="/dashboard" />
           <div className="header-actions">
             <span className="chip hide-sm" title={session.email}>
-              👤 {session.name}
+              {session.name}
             </span>
             <ThemeToggle />
             <button
@@ -177,14 +180,23 @@ export default function Dashboard() {
         <div className="container">
           <div className="dash-head">
             <div>
-              <h1>Namaste, {firstName} 👋</h1>
-              <p>Upload a case document and let four agents analyze it.</p>
+              <span className="kicker">The case desk</span>
+              <h1>
+                Namaste, <em>{firstName}</em>.
+              </h1>
+              <p>File a case document and four agents will read it for you.</p>
             </div>
+            <span className="mono muted hide-sm">{new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</span>
           </div>
 
           <div className="dash-grid">
             <div className="card panel input-panel">
-              <h2>New case</h2>
+              <div className="panel-head mono">
+                <span>Form 1 · New filing</span>
+                <span>{text ? "Ready" : "Blank"}</span>
+              </div>
+              <div className="panel-body">
+              <h2>File a case</h2>
               <label
                 className={`dropzone${drag ? " drag" : ""}`}
                 onDragOver={(e) => {
@@ -225,7 +237,7 @@ export default function Dashboard() {
               )}
 
               <div className="samples">
-                <span>Or try a sample:</span>
+                <span>Or cite a precedent sample</span>
                 {SAMPLES.map((s) => (
                   <button
                     key={s.id}
@@ -292,25 +304,23 @@ export default function Dashboard() {
               <p className="small-print">
                 Only the extracted text is sent for analysis. LexAgent assists understanding and is not legal advice.
               </p>
+              </div>
             </div>
 
             <div ref={resultsRef} style={{ scrollMarginTop: 84 }} aria-live="polite">
               {!started ? (
                 <div className="card empty">
-                  <svg width="72" height="72" viewBox="0 0 64 64" aria-hidden="true">
-                    <rect width="64" height="64" rx="18" fill="var(--surface-2)" />
-                    <g fill="none" stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M32 16v32M23 48h18M19 23h26M19 23l-6 12h12zM45 23l-6 12h12z" />
-                    </g>
-                  </svg>
-                  <h2>Your analysis will appear here</h2>
-                  <p>Upload a document or pick a sample, then press Analyze Case. You&apos;ll see each agent work in real time.</p>
-                  <div className="progress-row" style={{ width: "100%", marginTop: 10 }}>
+                  <span className="kicker">Order sheet · awaiting filing</span>
+                  <h2>
+                    The bench is <em>ready</em>.
+                  </h2>
+                  <p>Upload a document or cite a sample, then press Analyze Case. You&apos;ll watch each agent read, in order, as it happens.</p>
+                  <div className="progress-row" style={{ width: "100%", marginTop: 18 }}>
                     {AGENTS.map((a, i) => (
                       <div key={a.id} className={`agent-chip c-${a.color}`} data-status="waiting">
-                        <span className="dot">{i + 1}</span>
-                        <span style={{ textAlign: "left" }}>
-                          <span className="nm" style={{ display: "block" }}>{a.name}</span>
+                        <span className="dot">{ROMAN[i]}</span>
+                        <span style={{ textAlign: "left", minWidth: 0 }}>
+                          <span className="nm">{a.name}</span>
                           <span className="st">{a.section}</span>
                         </span>
                       </div>
@@ -323,7 +333,7 @@ export default function Dashboard() {
                     <div className="progress-row">
                       {AGENTS.map((a, i) => (
                         <div key={a.id} className={`agent-chip c-${a.color}`} data-status={statuses[a.id]}>
-                          <span className="dot">{statuses[a.id] === "done" ? "✓" : statuses[a.id] === "failed" || statuses[a.id] === "skipped" ? "!" : i + 1}</span>
+                          <span className="dot">{statuses[a.id] === "done" ? "✓" : statuses[a.id] === "failed" || statuses[a.id] === "skipped" ? "!" : ROMAN[i]}</span>
                           <span style={{ minWidth: 0 }}>
                             <span className="nm" style={{ display: "block" }}>{a.name}</span>
                             <span className="st">{STATUS_TEXT[statuses[a.id]]}</span>

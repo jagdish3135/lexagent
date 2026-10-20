@@ -1,39 +1,43 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
-import { FlowGraphic } from "@/components/FlowGraphic";
-import { ScalesIcon } from "@/components/Logo";
+import { CaseFile } from "@/components/CaseFile";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { AGENTS } from "@/lib/schemas";
 
-const outputs: Record<string, string> = {
-  summarizer: "Plain-language story, parties, timeline",
-  analyst: "Key facts, issues, arguments, Acts and sections",
-  verifier: "Agreements, differences, inconsistencies, confidence",
-  chief: "Findings, strengths and weaknesses, next steps",
+const i = (n: number) => ({ "--i": n }) as CSSProperties;
+
+const files: Record<string, string[]> = {
+  summarizer: ["Plain-language story", "Parties", "Timeline"],
+  analyst: ["Key facts", "Issues for the court", "Arguments", "Acts & sections"],
+  verifier: ["Agreements", "Differences", "Inconsistencies", "Confidence"],
+  chief: ["Key findings", "Strengths & weaknesses", "Open questions", "Next steps"],
 };
 
-const steps = [
-  { n: "01", title: "Upload the case", text: "Drop a PDF, Word (.docx) or text file, or paste the judgment, FIR, complaint or petition." },
-  { n: "02", title: "Four agents read it", text: "Two agents read independently, a third cross-checks them, and a fourth writes the final analysis." },
-  { n: "03", title: "Export the report", text: "Download a clean, branded PDF report to share with your advocate, client or study group." },
+const stages = [
+  { n: "i.", label: "Filing", title: "Upload the case", text: "Drop a PDF, Word (.docx) or text file, or paste a judgment, FIR, complaint or petition. Text is read in your browser; the file never leaves it." },
+  { n: "ii.", label: "Hearing", title: "Four agents read it", text: "Two agents read independently. A third cross-examines their readings against the document. A fourth writes the brief." },
+  { n: "iii.", label: "Order", title: "Take the report", text: "Export a typeset PDF with the LexAgent seal, ready for your advocate, your client, or your study group." },
 ];
 
-const users = [
-  { ico: "🧑‍🤝‍🧑", title: "Citizens", text: "Understand your own case in plain words before you meet a lawyer." },
-  { ico: "🎓", title: "Law students", text: "See facts, issues and sections laid out, and compare them with your own reading." },
-  { ico: "💼", title: "Lawyers", text: "Get a first-pass brief of long files and spot gaps faster." },
-  { ico: "📚", title: "Judges and researchers", text: "Skim structured summaries to reduce the reading load of heavy dockets." },
+const readers = [
+  { who: "Citizens", line: "“What does this notice actually say about me?”" },
+  { who: "Law students", line: "“Which issues did the court have to decide?”" },
+  { who: "Advocates", line: "“Give me the first read of this 40-page file.”" },
+  { who: "Judges & researchers", line: "“Summarise the docket before the hearing.”" },
 ];
 
-const laws = [
+const statutes = [
   "Bharatiya Nyaya Sanhita, 2023",
-  "BNSS, 2023",
+  "Bharatiya Nagarik Suraksha Sanhita, 2023",
   "Bharatiya Sakshya Adhiniyam, 2023",
-  "IPC · CrPC · Evidence Act",
   "Constitution of India",
-  "NI Act, 1881",
+  "Negotiable Instruments Act, 1881",
   "Consumer Protection Act, 2019",
-  "CPC, 1908",
+  "Code of Civil Procedure, 1908",
+  "Indian Penal Code, 1860",
+  "Code of Criminal Procedure, 1973",
+  "Indian Evidence Act, 1872",
 ];
 
 export default function Home() {
@@ -44,114 +48,157 @@ export default function Home() {
         <section className="hero">
           <div className="container">
             <div>
-              <span className="eyebrow">
-                <ScalesIcon size={16} /> Multi-agent legal analysis · Indian law
+              <span className="kicker rise" style={i(0)}>
+                In re: the pile of case files on your desk
               </span>
-              <h1>
-                Understand any case file in <em>minutes</em>, not days.
+              <h1 className="rise" style={i(1)}>
+                Four minds read the case. <em>You</em> read the <span className="strike">file</span> brief.
               </h1>
-              <p className="hero-lede">
-                LexAgent reads long legal documents with four AI agents that check each other&apos;s work, then gives you a
-                clear summary, the legal insights and a final analysis you can export as a PDF.
+              <p className="lede rise" style={i(2)}>
+                LexAgent reads long Indian legal documents with four AI agents that check each other&apos;s work, then hands
+                you a plain summary, the law that applies, a cross-examination of both readings and a final analysis, typeset
+                as a PDF.
               </p>
-              <div className="hero-cta">
+              <div className="hero-cta rise" style={i(3)}>
                 <Link href="/signup" className="btn btn-primary">
-                  Analyze a case free →
+                  File your first case →
                 </Link>
-                <a href="#how" className="btn btn-ghost">
-                  See how it works
+                <a href="/sample-report.pdf" className="text-link" target="_blank" rel="noopener">
+                  Read a sample report
                 </a>
               </div>
-              <p className="hero-note">🛡 Decision support, not a decision. LexAgent never gives a verdict.</p>
+              <div className="ledger rise" style={i(4)}>
+                <div>
+                  <b>4</b>
+                  <span>Agents on the bench</span>
+                </div>
+                <div>
+                  <b>2</b>
+                  <span>Independent readings</span>
+                </div>
+                <div>
+                  <b>1</b>
+                  <span>Cross-examination</span>
+                </div>
+                <div>
+                  <b>0</b>
+                  <span>Verdicts. Ever.</span>
+                </div>
+              </div>
             </div>
-            <div className="card hero-visual">
-              <FlowGraphic />
-            </div>
+            <CaseFile />
           </div>
         </section>
 
-        <section className="section" id="how">
+        <div className="ticker" aria-label="Laws the agents know">
+          <div className="ticker-track">
+            {[0, 1].map((copy) => (
+              <span key={copy} aria-hidden={copy === 1}>
+                {statutes.map((s) => (
+                  <span key={s}>
+                    {s}
+                    <i>✦</i>
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <section className="section" id="proceedings">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">How it works</span>
-              <h2>From a 40-page file to a 2-page brief</h2>
+              <div>
+                <span className="kicker">The proceedings</span>
+                <h2>
+                  From a forty-page file to a <em>two-page</em> brief.
+                </h2>
+              </div>
               <p>
-                India&apos;s courts carry a huge backlog, and every case starts with someone reading a long document. LexAgent
-                does the first read for you.
+                India&apos;s courts carry a backlog of crores of cases, and every one of them begins with someone reading a long
+                document. LexAgent does the first reading, so you can start from understanding.
               </p>
             </div>
-            <div className="grid grid-3">
-              {steps.map((s) => (
-                <div className="card step-card" key={s.n}>
-                  <div className="step-n">{s.n}</div>
+            <div className="stages">
+              {stages.map((s) => (
+                <article className="stage" key={s.n}>
+                  <div className="numeral">{s.n}</div>
+                  <span className="mono muted">Stage · {s.label}</span>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section" id="agents">
+        <section className="section" id="bench">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Meet the agents</span>
-              <h2>Four roles, one cross-checked answer</h2>
+              <div>
+                <span className="kicker">The bench of four</span>
+                <h2>
+                  One AI can be confidently wrong. <em>Four</em> keep each other honest.
+                </h2>
+              </div>
               <p>
-                One AI can be confidently wrong. LexAgent gives the same case to independent agents and makes a third one
-                compare them before anything reaches you.
+                Every agent works from the same document under the same rules: ground every point in the text, never invent a
+                citation, never deliver a verdict, and know that BNS, BNSS and BSA replaced the IPC, CrPC and Evidence Act in 2024.
               </p>
             </div>
-            <div className="grid grid-2 grid-4">
-              {AGENTS.map((a, i) => (
-                <div className={`card agent-card c-${a.color}`} key={a.id}>
-                  <div className="num">{i + 1}</div>
+            <div className="bench">
+              {AGENTS.map((a, n) => (
+                <div className={`bench-row c-${a.color}`} key={a.id}>
+                  <span className="no">{["i", "ii", "iii", "iv"][n]}</span>
                   <h3>{a.name}</h3>
                   <p>{a.role}.</p>
-                  <p className="out">→ {outputs[a.id]}</p>
+                  <ul>
+                    {files[a.id]!.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
-            </div>
-            <div className="legal-list" aria-label="Laws the agents know">
-              {laws.map((l) => (
-                <span className="chip" key={l}>
-                  {l}
-                </span>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section" id="users">
+        <section className="section" id="readers">
           <div className="container">
             <div className="section-head">
-              <span className="eyebrow">Who it&apos;s for</span>
-              <h2>Built for everyone who reads the law</h2>
+              <div>
+                <span className="kicker">Who reads with LexAgent</span>
+                <h2>
+                  Built for everyone who has to <em>read</em> the law.
+                </h2>
+              </div>
             </div>
-            <div className="grid grid-2">
-              {users.map((u) => (
-                <div className="card user-card" key={u.title}>
-                  <span className="ico" aria-hidden="true">
-                    {u.ico}
-                  </span>
-                  <div>
-                    <h3>{u.title}</h3>
-                    <p>{u.text}</p>
-                  </div>
+            <div className="readers">
+              {readers.map((r) => (
+                <div className="reader" key={r.who}>
+                  <span className="mono muted">{r.who}</span>
+                  <blockquote>{r.line}</blockquote>
                 </div>
               ))}
             </div>
 
-            <div className="disclaimer-band">
+            <div className="verdict">
+              <div className="big-stamp" aria-hidden="true">
+                <span>
+                  NOT A<big>judgment</big>LEXAGENT
+                </span>
+              </div>
               <div>
-                <h2>Assists understanding. Never replaces your advocate.</h2>
+                <h2>
+                  It assists understanding. It never replaces your <em>advocate</em>, or the court.
+                </h2>
                 <p>
-                  LexAgent does not give legal judgments or decisions. Always verify sections and citations, and consult a
-                  qualified advocate before acting.
+                  LexAgent gives no legal judgments or decisions. Verify every section and citation against the record, and
+                  consult a qualified advocate before you act.
                 </p>
               </div>
               <Link href="/signup" className="btn">
-                Try LexAgent
+                Open your docket →
               </Link>
             </div>
           </div>

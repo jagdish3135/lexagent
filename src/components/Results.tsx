@@ -5,11 +5,11 @@ function Section({ n, color, title, agent, children }: { n: number; color: strin
     <section className={`card result c-${color}`} aria-labelledby={`sec-${n}`}>
       <div className="result-head">
         <span className="badge" aria-hidden="true">
-          {n}
+          §{n}
         </span>
         <div>
           <h2 id={`sec-${n}`}>{title}</h2>
-          <small>by the {agent} agent</small>
+          <small>Filed by the {agent}</small>
         </div>
       </div>
       <div className="result-body">{children}</div>
@@ -197,7 +197,7 @@ export function ComparisonCard({ data }: { data: Comparison }) {
 export function FinalCard({ data }: { data: Final }) {
   return (
     <Section n={4} color="red" title="Final Analysis" agent="Chief Analyst">
-      <p style={{ fontSize: 16.5 }}>{data.overview}</p>
+      <p style={{ font: "400 1.45rem/1.35 var(--serif)" }}>{data.overview}</p>
       <div>
         <h3>Key findings</h3>
         <List items={data.keyFindings} />
@@ -206,9 +206,9 @@ export function FinalCard({ data }: { data: Final }) {
         {data.sides.map((s, i) => (
           <div className="subcard" key={i}>
             <h4>{s.side}</h4>
-            <p className="muted" style={{ fontSize: 13, fontWeight: 700 }}>STRENGTHS</p>
+            <p className="lbl">STRENGTHS</p>
             <List items={s.strengths} />
-            <p className="muted" style={{ fontSize: 13, fontWeight: 700, marginTop: 10 }}>WEAKNESSES</p>
+            <p className="lbl">WEAKNESSES</p>
             <List items={s.weaknesses} />
           </div>
         ))}

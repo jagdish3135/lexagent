@@ -64,29 +64,63 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           <ThemeToggle />
         </div>
       </header>
-      <main className="auth-wrap" id="main">
-        <div className="card auth-card">
-          <h1>{isSignup ? "Create your account" : "Welcome back"}</h1>
-          <p className="sub">{isSignup ? "Start analyzing case documents in minutes." : "Log in to your LexAgent dashboard."}</p>
-          <form onSubmit={onSubmit} noValidate>
-            {errors.form && (
-              <p className="form-error" role="alert">
-                {errors.form}
-              </p>
-            )}
-            {isSignup && field("name", "Full name", "text", "name")}
-            {field("email", "Email", "email", "email")}
-            {field("password", "Password", "password", isSignup ? "new-password" : "current-password")}
-            <button className="btn btn-primary" style={{ width: "100%" }} disabled={busy}>
-              {busy && <span className="spinner" aria-hidden="true" />}
-              {isSignup ? "Create account" : "Log in"}
-            </button>
-          </form>
-          <p className="auth-switch">
-            {isSignup ? "Already have an account? " : "New to LexAgent? "}
-            <Link href={isSignup ? "/login" : "/signup"}>{isSignup ? "Log in" : "Create an account"}</Link>
-          </p>
-          <p className="demo-note">Demo sign-in: accounts are saved only in this browser and are not real accounts yet.</p>
+      <main className="auth-split" id="main">
+        <aside className="auth-art" aria-hidden="true">
+          <span className="kicker" style={{ color: "var(--seal)" }}>
+            Article 39A
+          </span>
+          <div>
+            <blockquote>
+              The State shall secure that the operation of the legal system promotes justice, on a basis of equal opportunity.
+            </blockquote>
+            <cite>Constitution of India · Equal justice and free legal aid</cite>
+          </div>
+          <div className="art-foot">
+            <span>Summarizer</span>
+            <span>Legal Analyst</span>
+            <span>Cross-Verifier</span>
+            <span>Chief Analyst</span>
+          </div>
+        </aside>
+        <div className="auth-wrap">
+          <div className="auth-card">
+            <span className="kicker">{isSignup ? "Form 1 · New registration" : "Form 2 · Appearance"}</span>
+            <h1>
+              {isSignup ? (
+                <>
+                  Open your <em>docket</em>.
+                </>
+              ) : (
+                <>
+                  Return to your <em>desk</em>.
+                </>
+              )}
+            </h1>
+            <p className="sub">
+              {isSignup ? "One minute to sign up, then file your first case." : "Log in to pick up where you left off."}
+            </p>
+            <form onSubmit={onSubmit} noValidate>
+              {errors.form && (
+                <p className="form-error" role="alert">
+                  {errors.form}
+                </p>
+              )}
+              {isSignup && field("name", "Full name", "text", "name")}
+              {field("email", "Email", "email", "email")}
+              {field("password", "Password", "password", isSignup ? "new-password" : "current-password")}
+              <button className="btn btn-primary" style={{ width: "100%", marginTop: 8 }} disabled={busy}>
+                {busy && <span className="spinner" aria-hidden="true" />}
+                {isSignup ? "Create account" : "Log in"}
+              </button>
+            </form>
+            <p className="auth-switch">
+              {isSignup ? "Already registered? " : "New to LexAgent? "}
+              <Link href={isSignup ? "/login" : "/signup"} className="text-link">
+                {isSignup ? "Log in" : "Create an account"}
+              </Link>
+            </p>
+            <p className="demo-note">Demo sign-in: accounts are saved only in this browser and are not real accounts yet.</p>
+          </div>
         </div>
       </main>
     </>

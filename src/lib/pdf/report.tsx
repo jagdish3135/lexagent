@@ -8,13 +8,13 @@ export interface ReportInfo {
 }
 
 const C = {
-  navy: "#14213D",
-  saffron: "#E07A1F",
-  gold: "#F2B661",
-  paper: "#F7F3EA",
+  navy: "#17140F",
+  saffron: "#C63A1F",
+  gold: "#F4EFE4",
+  paper: "#F4EFE4",
   ink: "#1F2937",
   muted: "#566074",
-  line: "#E2D9C6",
+  line: "#D3C9B5",
   blue: ["#1D4ED8", "#E6EDFF"],
   amber: ["#A15C00", "#FDF0D5"],
   green: ["#157F3D", "#E3F4E8"],
@@ -26,7 +26,7 @@ const s = StyleSheet.create({
   band: { marginTop: -36, marginHorizontal: -40, paddingVertical: 22, paddingHorizontal: 40, backgroundColor: C.navy, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   brand: { flexDirection: "row", alignItems: "center" },
   brandName: { fontFamily: "Times-Bold", fontSize: 22, lineHeight: 1, color: "#FFFFFF", marginLeft: 10 },
-  brandSub: { fontFamily: "Helvetica-Bold", fontSize: 7.5, lineHeight: 1, color: C.gold, letterSpacing: 1.6, marginLeft: 10, marginTop: 6 },
+  brandSub: { fontFamily: "Helvetica-Bold", fontSize: 7.5, lineHeight: 1, color: "#FF7A5C", letterSpacing: 1.6, marginLeft: 10, marginTop: 6 },
   bandMeta: { alignItems: "flex-end" },
   bandMetaText: { color: "#D6DCE8", fontSize: 8.5 },
   saffronRule: { marginHorizontal: -40, height: 4, backgroundColor: C.saffron },
@@ -69,17 +69,17 @@ const s = StyleSheet.create({
   footRule: { position: "absolute", bottom: 42, left: 40, width: 515.28, height: 0.8, backgroundColor: C.line },
   footPill: { position: "absolute", bottom: 22, left: 40, flexDirection: "row" },
   pillA: { borderTopLeftRadius: 3, borderBottomLeftRadius: 3, backgroundColor: C.navy, color: "#FFFFFF", fontSize: 7, fontFamily: "Helvetica-Bold", paddingVertical: 3, paddingHorizontal: 5 },
-  pillB: { borderTopRightRadius: 3, borderBottomRightRadius: 3, backgroundColor: C.gold, color: C.navy, fontSize: 7, fontFamily: "Helvetica-Bold", paddingVertical: 3, paddingHorizontal: 5 },
+  pillB: { borderTopRightRadius: 3, borderBottomRightRadius: 3, backgroundColor: C.saffron, color: "#FFFFFF", fontSize: 7, fontFamily: "Helvetica-Bold", paddingVertical: 3, paddingHorizontal: 5 },
   footText: { position: "absolute", bottom: 24, fontSize: 7.5, color: C.muted },
 });
 
 function Mark({ size = 30, tile = C.navy, ink = C.gold }: { size?: number; tile?: string; ink?: string }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 64 64">
-      <Rect x="0" y="0" width="64" height="64" rx="16" fill={tile} />
+      <Rect x="0" y="0" width="64" height="64" fill={tile} />
       <Path d="M32 14v34M22 48h20M18 22h28" stroke={ink} strokeWidth={3.6} strokeLinecap="round" />
       <Path d="M18 22l-7 14h14zM46 22l-7 14h14z" stroke={ink} strokeWidth={3.6} strokeLinejoin="round" fill="none" />
-      <Circle cx="32" cy="14" r="3.4" fill={ink} />
+      <Circle cx="32" cy="14" r="3.6" fill={C.saffron} />
     </Svg>
   );
 }
@@ -146,7 +146,7 @@ export function ReportDoc({ outputs, info, date }: { outputs: AgentOutputs; info
         />
         <View style={s.band}>
           <View style={s.brand}>
-            <Mark size={38} tile="#1E2D52" />
+            <Mark size={38} tile="#2A251D" />
             <View>
               <Text style={s.brandName}>LexAgent</Text>
               <Text style={s.brandSub}>AI CASE ANALYSIS REPORT</Text>

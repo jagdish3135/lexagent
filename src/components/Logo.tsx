@@ -3,12 +3,12 @@ import Link from "next/link";
 export function LogoMark({ size = 34 }: { size?: number }) {
   return (
     <svg className="logo-mark" width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
-      <rect width="64" height="64" rx="16" fill="#14213d" />
-      <g fill="none" stroke="#f2b661" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="64" height="64" fill="var(--ink)" />
+      <g fill="none" stroke="var(--paper)" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M32 14v34M22 48h20M18 22h28" />
         <path d="M18 22l-7 14h14zM46 22l-7 14h14z" />
       </g>
-      <circle cx="32" cy="14" r="3.4" fill="#f2b661" />
+      <circle cx="32" cy="14" r="3.6" fill="var(--seal)" />
     </svg>
   );
 }
@@ -17,7 +17,9 @@ export function Logo({ href = "/" }: { href?: string }) {
   return (
     <Link href={href} className="logo" aria-label="LexAgent home">
       <LogoMark />
-      LexAgent
+      <span>
+        Lex<em>Agent</em>
+      </span>
     </Link>
   );
 }
