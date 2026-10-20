@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FlowGraphic } from "@/components/FlowGraphic";
+import { ScalesIcon } from "@/components/Logo";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { AGENTS } from "@/lib/schemas";
@@ -21,7 +22,7 @@ const users = [
   { ico: "🧑‍🤝‍🧑", title: "Citizens", text: "Understand your own case in plain words before you meet a lawyer." },
   { ico: "🎓", title: "Law students", text: "See facts, issues and sections laid out, and compare them with your own reading." },
   { ico: "💼", title: "Lawyers", text: "Get a first-pass brief of long files and spot gaps faster." },
-  { ico: "⚖️", title: "Judges and researchers", text: "Skim structured summaries to reduce the reading load of heavy dockets." },
+  { ico: "📚", title: "Judges and researchers", text: "Skim structured summaries to reduce the reading load of heavy dockets." },
 ];
 
 const laws = [
@@ -43,7 +44,9 @@ export default function Home() {
         <section className="hero">
           <div className="container">
             <div>
-              <span className="eyebrow">⚖ Multi-agent legal analysis · Indian law</span>
+              <span className="eyebrow">
+                <ScalesIcon size={16} /> Multi-agent legal analysis · Indian law
+              </span>
               <h1>
                 Understand any case file in <em>minutes</em>, not days.
               </h1>

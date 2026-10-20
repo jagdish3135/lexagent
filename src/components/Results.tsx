@@ -33,7 +33,7 @@ export function SummaryCard({ data }: { data: Summary }) {
         <p className="case-title">{data.title || "Case summary"}</p>
         <div className="meta-chips">
           {data.caseType && <span className="chip">{data.caseType}</span>}
-          {data.court && <span className="chip">🏛 {data.court}</span>}
+          {data.court && <span className="chip">{data.court}</span>}
         </div>
       </div>
       <div>

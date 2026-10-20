@@ -42,7 +42,15 @@ export async function POST(req: Request) {
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      const emit = (e: StreamEvent) => controller.enqueue(encoder.encode(JSON.stringify(e) + "\n"));
+      let open = true;
+      const emit = (e: StreamEvent) => {
+        if (!open) return;
+        try {
+          controller.enqueue(encoder.encode(JSON.stringify(e) + "\n"));
+        } catch {
+          open = false; // The client went away; let the pipeline finish quietly.
+        }
+      };
       emit({ type: "meta", mode: cfg ? "live" : "demo", model: cfg?.model ?? "demo", truncated, chars: caseText.length });
       try {
         await runPipeline(caseText, chat, emit);
@@ -50,7 +58,7 @@ export async function POST(req: Request) {
       } catch {
         emit({ type: "error", error: "The analysis stopped unexpectedly. Please try again." });
       }
-      controller.close();
+      if (open) controller.close();
     },
   });
 

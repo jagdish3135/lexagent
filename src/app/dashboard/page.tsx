@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type DragEvent } from "react";
-import { Logo } from "@/components/Logo";
+import { Logo, ScalesIcon } from "@/components/Logo";
 import { ComparisonCard, FinalCard, InsightsCard, SkeletonCard, SummaryCard } from "@/components/Results";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -284,7 +284,9 @@ export default function Dashboard() {
                     <span className="spinner" aria-hidden="true" /> Agents are working…
                   </>
                 ) : (
-                  "⚖ Analyze Case"
+                  <>
+                    <ScalesIcon /> Analyze Case
+                  </>
                 )}
               </button>
               <p className="small-print">

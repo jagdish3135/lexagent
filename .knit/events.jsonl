@@ -8,3 +8,6 @@
 {"ts":"2026-10-20T20:57:36+05:30","type":"commit","agent":"backend-dev","task":"5","msg":"Agent pipeline, OpenAI-compatible LLM client, demo mode and streaming analyze API"}
 {"ts":"2026-10-20T20:57:36+05:30","type":"agent_start","agent":"ux-designer","task":"1-2","msg":"Design tokens, theme, landing page"}
 {"ts":"2026-10-20T21:06:32+05:30","type":"note","agent":"frontend-dev","task":"1-7","msg":"Landing, auth, dashboard, extraction and PDF report built; typecheck, lint and build pass"}
+{"ts":"2026-10-20T21:25:49+05:30","type":"commit","agent":"frontend-dev","task":"6-7","msg":"Fix narrow-screen layout, page numbers and spacing in PDF report"}
+{"ts":"2026-10-20T21:25:49+05:30","type":"note","agent":"tester","msg":"Browser pass: signup validation, demo analysis, PDF/DOCX/DOC extraction, 360px layout, light/dark all OK"}
+{"ts":"2026-10-20T21:25:49+05:30","type":"agent_start","agent":"tech-writer","task":"9","msg":"README graphics: banner, pipeline SVG, screenshots, demo GIF/MP4"}

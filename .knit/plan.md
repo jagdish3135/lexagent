@@ -36,14 +36,14 @@ Next.js 15 (App Router, TypeScript), plain CSS with tokens on :root. No database
   + MP4 recorded from the app, collapsible `<details>` sections, badges, live-demo button.
 
 ## Tasks
-- [ ] T1 Scaffold Next.js, tokens, theme toggle, layout + footer badge (US-1)
-- [ ] T2 Landing page (US-1)
-- [ ] T3 Dummy auth: login/signup/logout + dashboard guard (US-2)
-- [ ] T4 Extraction + case input + sample cases (US-3)
-- [ ] T5 LLM client, agent pipeline, demo mode, streaming API route + tests (US-4, US-7)
-- [ ] T6 Dashboard progress + result sections (US-4, US-5)
-- [ ] T7 Export: graphical PDF with LexAgent badge (US-6)
-- [ ] T8 Check: tests, build, browser pass, quality card
+- [x] T1 Scaffold Next.js, tokens, theme toggle, layout + footer badge (US-1)
+- [x] T2 Landing page (US-1)
+- [x] T3 Dummy auth: login/signup/logout + dashboard guard (US-2)
+- [x] T4 Extraction + case input + sample cases (US-3)
+- [x] T5 LLM client, agent pipeline, demo mode, streaming API route + tests (US-4, US-7)
+- [x] T6 Dashboard progress + result sections (US-4, US-5)
+- [x] T7 Export: graphical PDF with LexAgent badge (US-6)
+- [x] T8 Check: tests, build, browser pass, quality card
 - [ ] T9 README with graphics, screenshots, demo GIF/MP4; ship to GitHub + Vercel (on approval)
 
 ## Decisions

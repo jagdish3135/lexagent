@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="LexAgent: multi-agent legal case analysis for Indian law">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7f3ea"/><stop offset="1" stop-color="#efe7d6"/></linearGradient>
+    <clipPath id="clip"><rect width="1280" height="420" rx="24"/></clipPath>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#e2d9c6"/></pattern>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1280" height="420" fill="url(#g)"/>
+    <rect x="780" y="0" width="500" height="420" fill="url(#dots)" opacity="0.7"/>
+    <rect x="0" y="414" width="1280" height="6" fill="#c2630f" opacity="0.9"/>
+  </g>
+  
+  <g transform="translate(72 84) scale(1.125)">
+    <rect width="64" height="64" rx="16" fill="#14213d"/>
+    <g fill="none" stroke="#f2b661" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 14v34M22 48h20M18 22h28"/><path d="M18 22l-7 14h14zM46 22l-7 14h14z"/>
+    </g>
+    <circle cx="32" cy="14" r="3.4" fill="#f2b661"/>
+  </g>
+  <text x="164" y="140" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700" fill="#14213d">LexAgent</text>
+  <text x="166" y="176" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="3" fill="#c2630f">MULTI-AGENT LEGAL ANALYSIS · INDIAN LAW</text>
+  <text x="72" y="236" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" fill="#14213d">Upload a case file. Four AI agents summarize it, find the law,</text>
+  <text x="72" y="268" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" fill="#14213d">check each other's work and hand you a <tspan font-weight="700" fill="#c2630f">PDF brief</tspan> in minutes.</text>
+  <g transform="translate(72 322)"><rect width="208" height="36" rx="18" fill="#ffffff" stroke="#e2d9c6"/><text x="104" y="23" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#14213d">BNS · BNSS · BSA aware</text></g><g transform="translate(292 322)"><rect width="216" height="36" rx="18" fill="#ffffff" stroke="#e2d9c6"/><text x="108" y="23" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#14213d">4 cross-checking agents</text></g><g transform="translate(520 322)"><rect width="111" height="36" rx="18" fill="#ffffff" stroke="#e2d9c6"/><text x="55.5" y="23" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#14213d">PDF export</text></g><g transform="translate(643 322)"><rect width="127" height="36" rx="18" fill="#ffffff" stroke="#e2d9c6"/><text x="63.5" y="23" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" fill="#14213d">Free AI APIs</text></g>
+  
+    <g transform="translate(850 78)">
+      <rect width="360" height="58" rx="14" fill="#ffffff" stroke="#e2d9c6"/>
+      <rect width="6" height="58" rx="3" fill="#1d4ed8"/>
+      <circle cx="36" cy="29" r="15" fill="#e6edff"/>
+      <text x="36" y="34" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#1d4ed8">1</text>
+      <text x="62" y="26" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#14213d">Summarizer</text>
+      <text x="62" y="45" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#566074">Plain-language summary</text>
+      <g>
+        <circle cx="330" cy="29" r="6" fill="#1d4ed8">
+          <animate attributeName="opacity" values="1;0.25;1" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.275;0.275;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+      <g opacity="0">
+        <circle cx="330" cy="29" r="11" fill="#1d4ed8"/>
+        <path d="M324.5 29.5l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.275;0.275;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(850 148)">
+      <rect width="360" height="58" rx="14" fill="#ffffff" stroke="#e2d9c6"/>
+      <rect width="6" height="58" rx="3" fill="#a15c00"/>
+      <circle cx="36" cy="29" r="15" fill="#fdf0d5"/>
+      <text x="36" y="34" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#a15c00">2</text>
+      <text x="62" y="26" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#14213d">Legal Analyst</text>
+      <text x="62" y="45" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#566074">Facts · issues · Acts &amp; sections</text>
+      <g>
+        <circle cx="330" cy="29" r="6" fill="#a15c00">
+          <animate attributeName="opacity" values="1;0.25;1" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.325;0.325;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+      <g opacity="0">
+        <circle cx="330" cy="29" r="11" fill="#a15c00"/>
+        <path d="M324.5 29.5l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.325;0.325;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(850 218)">
+      <rect width="360" height="58" rx="14" fill="#ffffff" stroke="#e2d9c6"/>
+      <rect width="6" height="58" rx="3" fill="#157f3d"/>
+      <circle cx="36" cy="29" r="15" fill="#e3f4e8"/>
+      <text x="36" y="34" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#157f3d">3</text>
+      <text x="62" y="26" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#14213d">Cross-Verifier</text>
+      <text x="62" y="45" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#566074">Agreements · gaps · confidence</text>
+      <g>
+        <circle cx="330" cy="29" r="6" fill="#157f3d">
+          <animate attributeName="opacity" values="1;0.25;1" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.550;0.550;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+      <g opacity="0">
+        <circle cx="330" cy="29" r="11" fill="#157f3d"/>
+        <path d="M324.5 29.5l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.550;0.550;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(850 288)">
+      <rect width="360" height="58" rx="14" fill="#ffffff" stroke="#e2d9c6"/>
+      <rect width="6" height="58" rx="3" fill="#b42318"/>
+      <circle cx="36" cy="29" r="15" fill="#fde8e6"/>
+      <text x="36" y="34" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="800" fill="#b42318">4</text>
+      <text x="62" y="26" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#14213d">Chief Analyst</text>
+      <text x="62" y="45" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="12.5" fill="#566074">Final structured analysis</text>
+      <g>
+        <circle cx="330" cy="29" r="6" fill="#b42318">
+          <animate attributeName="opacity" values="1;0.25;1" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.775;0.775;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+      <g opacity="0">
+        <circle cx="330" cy="29" r="11" fill="#b42318"/>
+        <path d="M324.5 29.5l4 4 7-8" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.775;0.775;1" dur="8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+</svg>
