@@ -8,6 +8,7 @@
 </p>
 
 <p align="center">
+  <a href="https://lexagent-phi.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-c63a1f?style=for-the-badge" alt="Try LexAgent live"></a>
   <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-17140f?style=for-the-badge" alt="Watch the demo"></a>
   <a href="#-run-it-locally"><img src="https://img.shields.io/badge/Run_it_in_2_minutes-f4efe4?style=for-the-badge&labelColor=17140f" alt="Run it locally"></a>
   <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-c63a1f?style=for-the-badge" alt="Open a sample PDF report"></a>
@@ -43,7 +44,9 @@
   <a href="docs/readme/demo.mp4"><img src="docs/readme/demo.gif" alt="Picking a sample case, four agents working live, results appearing, PDF export" width="100%"></a>
 </p>
 
-<p align="center"><sub>▶ <a href="docs/readme/demo.mp4"><b>Watch the full 30-second walkthrough (MP4)</b></a>: landing page → sign up → sample case → four agents live → results → PDF export</sub></p>
+<p align="center"><b>🌐 Live: <a href="https://lexagent-phi.vercel.app">lexagent-phi.vercel.app</a></b></p>
+
+<p align="center"><sub>▶ <a href="docs/readme/demo.mp4"><b>Watch the full walkthrough (MP4)</b></a>: landing page → sign up → sample case → four agents live → results → PDF export</sub></p>
 
 ---
 
