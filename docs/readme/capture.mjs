@@ -1,15 +1,15 @@
 // Captures the README media from a running LexAgent in demo mode (LLM_API_KEY empty):
-// screenshots, PDF page previews and a full-HD demo video (MP4 + animated WebP + GIF fallback).
-// Usage: node docs/readme/capture.mjs [shots,pdf,video] [baseUrl]
+// screenshots and PDF page previews.
+// Usage: node docs/readme/capture.mjs [shots,pdf] [baseUrl]
 // Needs: docs/readme/sample-report.pdf and sample-report-hi.pdf (scripts/render-sample-pdf.tsx), and ffmpeg on PATH.
 import { chromium } from "playwright";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { readFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const ONLY = (process.argv[2] ?? "shots,pdf,video").split(",");
+const ONLY = (process.argv[2] ?? "shots,pdf").split(",");
 const BASE = process.argv[3] ?? "http://127.0.0.1:3101";
 const browser = await chromium.launch();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -55,6 +55,20 @@ if (ONLY.includes("shots")) {
     await ctx.close();
   }
   {
+    // README hero: a Marathi district-court case uploaded and analysed (demo mode recognises the sample file).
+    const ctx = await context({});
+    const page = await ctx.newPage();
+    await page.goto(`${BASE}/dashboard`);
+    await page.locator("input[type=file]").setInputFiles(join(here, "../../sample-cases/06-farm-road-injunction-marathi.docx"));
+    await page.locator(".file-pill").waitFor();
+    await page.locator(".analyze-btn").click();
+    await page.locator(".results-bar .btn-primary").waitFor({ timeout: 30_000 });
+    await page.evaluate(() => window.scrollTo(0, document.querySelector(".dash-grid").offsetTop - 90));
+    await wait(500);
+    await page.screenshot({ path: join(here, "dashboard-marathi.png") });
+    await ctx.close();
+  }
+  {
     const ctx = await context({ lang: "hi" });
     const page = await ctx.newPage();
     await page.goto(BASE);
@@ -84,7 +98,7 @@ if (ONLY.includes("shots")) {
 
 // Screenshots are converted to JPEG (the paper grain makes PNGs several MB each).
 if (ONLY.includes("shots")) {
-  for (const f of ["landing-light", "landing-dark", "landing-hi", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark", "signup-roles-mr"]) {
+  for (const f of ["dashboard-marathi", "landing-light", "landing-dark", "landing-hi", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark", "signup-roles-mr"]) {
     execFileSync("ffmpeg", ["-v", "error", "-y", "-i", join(here, `${f}.png`), "-q:v", "3", join(here, `${f}.jpg`)]);
     rmSync(join(here, `${f}.png`));
   }
@@ -133,93 +147,6 @@ if (ONLY.includes("pdf")) {
     }
     await ctx.close();
   }
-}
-
-// 3. Demo video at 1920x1080 using Chrome's screencast (much sharper than Playwright's built-in recorder).
-if (ONLY.includes("video")) {
-  const framesDir = join(here, "_frames");
-  rmSync(framesDir, { recursive: true, force: true });
-  mkdirSync(framesDir);
-  const ctx = await context({ theme: "light", session: false, viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1.5 });
-  // The paper-grain overlay is random noise, which video codecs can't compress; hide it for the recording.
-  await ctx.addInitScript(() =>
-    document.addEventListener("DOMContentLoaded", () => {
-      const style = document.createElement("style");
-      style.textContent = "body::before{display:none!important}";
-      document.head.append(style);
-    }),
-  );
-  const page = await ctx.newPage();
-  const cdp = await ctx.newCDPSession(page);
-  const frames = [];
-  cdp.on("Page.screencastFrame", async ({ data, metadata, sessionId }) => {
-    const file = join(framesDir, `f${String(frames.length).padStart(5, "0")}.jpg`);
-    writeFileSync(file, Buffer.from(data, "base64"));
-    frames.push({ file, t: metadata.timestamp });
-    await cdp.send("Page.screencastFrameAck", { sessionId }).catch(() => {});
-  });
-  const smoothScroll = async (px, ms) => {
-    const steps = Math.round(ms / 16);
-    for (let i = 0; i < steps; i++) {
-      await page.mouse.wheel(0, px / steps);
-      await wait(16);
-    }
-  };
-
-  await page.goto(BASE);
-  await cdp.send("Page.startScreencast", { format: "jpeg", quality: 92, maxWidth: 1920, maxHeight: 1080, everyNthFrame: 1 });
-  await wait(6000);
-  await page.mouse.move(640, 400);
-  await smoothScroll(900, 1800);
-  await wait(900);
-  await smoothScroll(-900, 1200);
-  await wait(400);
-  await page.getByRole("link", { name: "File a case" }).first().click();
-  await page.getByLabel("Full name").pressSequentially("Asha Verma", { delay: 45 });
-  await page.getByLabel("Email").pressSequentially("asha@lexagent.test", { delay: 30 });
-  await page.getByLabel("Password").pressSequentially("demo-pass", { delay: 30 });
-  await page.locator(".role-opt").nth(2).click(); // Advocate
-  await wait(700);
-  await page.getByRole("button", { name: "Create account" }).click();
-  await page.getByRole("button", { name: /Cheque bounce/ }).waitFor();
-  await wait(1200);
-  await page.getByRole("button", { name: "म" }).click(); // switch the interface to Marathi
-  await wait(1500);
-  // Upload a Marathi district-court case file (DOCX), as a user would.
-  await page.locator('input[type=file]').setInputFiles(join(here, "../../sample-cases/06-farm-road-injunction-marathi.docx"));
-  await wait(1600);
-  await page.locator(".analyze-btn").click();
-  await page.locator(".results-bar .btn-primary").waitFor({ timeout: 30_000 });
-  await wait(1400);
-  await page.mouse.move(900, 500);
-  await smoothScroll(1400, 2600);
-  await wait(700);
-  await smoothScroll(1500, 2600);
-  await wait(700);
-  await smoothScroll(1600, 2600);
-  await wait(1000);
-  await smoothScroll(-4500, 2000);
-  await wait(800);
-  const download = page.waitForEvent("download");
-  await page.locator(".results-bar .btn-primary").click();
-  await download;
-  await wait(1500);
-  await cdp.send("Page.stopScreencast");
-  await ctx.close();
-
-  // Frames arrive only when the screen changes, so give each frame its real duration.
-  const lines = frames.map((f, i) => {
-    const next = frames[i + 1]?.t ?? f.t + 1;
-    return `file '${f.file.replace(/\\/g, "/")}'\nduration ${Math.max(0.001, next - f.t).toFixed(3)}`;
-  });
-  writeFileSync(join(framesDir, "list.txt"), `${lines.join("\n")}\nfile '${frames.at(-1).file.replace(/\\/g, "/")}'\n`);
-  const ff = (...args) => execFileSync("ffmpeg", ["-v", "error", "-y", ...args], { stdio: "inherit" });
-  ff("-f", "concat", "-safe", "0", "-i", join(framesDir, "list.txt"), "-vf", "fps=30,scale=1920:1080:flags=lanczos,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-tune", "animation", "-movflags", "+faststart", join(here, "demo.mp4"));
-  // README preview: the dashboard part (sample → agents → results), sped up 1.5x.
-  const clip = ["-ss", "17", "-t", "30", "-i", join(here, "demo.mp4")];
-  ff(...clip, "-vf", "setpts=PTS/1.5,fps=12,scale=1000:-1:flags=lanczos", "-c:v", "libwebp_anim", "-quality", "70", "-compression_level", "6", "-loop", "0", join(here, "demo.webp"));
-  ff(...clip, "-vf", "setpts=PTS/1.5,fps=8,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle", join(here, "demo.gif"));
-  rmSync(framesDir, { recursive: true, force: true });
 }
 
 await browser.close();

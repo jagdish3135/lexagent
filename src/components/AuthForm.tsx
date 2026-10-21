@@ -76,7 +76,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       </header>
       <main className="auth-split" id="main">
         <aside className="auth-art" aria-hidden="true">
-          <span className="kicker" style={{ color: "var(--seal)" }}>
+          <span className="kicker" style={{ color: "var(--on-band)" }}>
             Article 39A
           </span>
           <div>

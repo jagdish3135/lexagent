@@ -9,7 +9,6 @@
 
 <p align="center">
   <a href="https://lexagent-phi.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-0b0b0b?style=for-the-badge" alt="Try LexAgent live"></a>
-  <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-444444?style=for-the-badge" alt="Watch the demo"></a>
   <a href="sample-cases"><img src="https://img.shields.io/badge/📂_Sample_cases-0b0b0b?style=for-the-badge" alt="Sample case files"></a>
   <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-444444?style=for-the-badge" alt="Open a sample PDF report"></a>
 </p>
@@ -26,10 +25,10 @@
 </p>
 
 <p align="center">
-  <b><a href="#-see-it-in-action">Demo</a></b> ·
+  <b><a href="#-see-it-in-action">Preview</a></b> ·
   <b><a href="#-how-it-works">How it works</a></b> ·
   <b><a href="#-meet-the-four-agents">Agents</a></b> ·
-  <b><a href="#-three-languages-five-kinds-of-reader">Languages & roles</a></b> ·
+  <b><a href="#-local-language-cases-three-interface-languages-five-kinds-of-reader">Languages & roles</a></b> ·
   <b><a href="#-the-pdf-report">PDF report</a></b> ·
   <b><a href="#-sample-cases">Sample cases</a></b> ·
   <b><a href="#-run-it-locally">Run locally</a></b> ·
@@ -46,13 +45,11 @@
 ## 🎬 See it in action
 
 <p align="center">
-  <a href="docs/readme/demo.mp4"><img src="docs/readme/demo.webp" alt="Uploading a Marathi district-court case file, four agents working live, the Marathi analysis appearing, PDF export" width="100%"></a>
+  <a href="https://lexagent-phi.vercel.app"><img src="docs/readme/dashboard-marathi.jpg" alt="A Marathi district-court case file uploaded and analysed by the four agents" width="100%"></a>
 </p>
 
-<p align="center"><b>🌐 Live: <a href="https://lexagent-phi.vercel.app">lexagent-phi.vercel.app</a></b></p>
-
-<p align="center"><sub>▶ <a href="docs/readme/demo.mp4"><b>Watch the full walkthrough in 1080p (MP4)</b></a>: landing page → sign up as an advocate → switch to मराठी → upload a Marathi case file → four agents live → results → PDF export<br>
-Preview not moving? <a href="docs/readme/demo.gif">Open the GIF version</a>.</sub></p>
+<p align="center"><b>🌐 Try it live: <a href="https://lexagent-phi.vercel.app">lexagent-phi.vercel.app</a></b><br>
+<sub>A Marathi district-court case file, read by the four agents. Sign up, pick a sample case, and press Analyze Case.</sub></p>
 
 ---
 
