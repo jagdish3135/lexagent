@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://lexagent-phi.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-0b0b0b?style=for-the-badge" alt="Try LexAgent live"></a>
+  <a href="https://lexagent-ai.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-0b0b0b?style=for-the-badge" alt="Try LexAgent live"></a>
   <a href="sample-cases"><img src="https://img.shields.io/badge/📂_Sample_cases-0b0b0b?style=for-the-badge" alt="Sample case files"></a>
   <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-444444?style=for-the-badge" alt="Open a sample PDF report"></a>
 </p>
@@ -45,10 +45,10 @@
 ## 🎬 See it in action
 
 <p align="center">
-  <a href="https://lexagent-phi.vercel.app"><img src="docs/readme/dashboard-marathi.jpg" alt="A Marathi district-court case file uploaded and analysed by the four agents" width="100%"></a>
+  <a href="https://lexagent-ai.vercel.app"><img src="docs/readme/dashboard-marathi.jpg" alt="A Marathi district-court case file uploaded and analysed by the four agents" width="100%"></a>
 </p>
 
-<p align="center"><b>🌐 Try it live: <a href="https://lexagent-phi.vercel.app">lexagent-phi.vercel.app</a></b><br>
+<p align="center"><b>🌐 Try it live: <a href="https://lexagent-ai.vercel.app">lexagent-ai.vercel.app</a></b><br>
 <sub>A Marathi district-court case file, read by the four agents. Sign up, pick a sample case, and press Analyze Case.</sub></p>
 
 ---
