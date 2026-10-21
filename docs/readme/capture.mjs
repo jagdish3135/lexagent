@@ -1,7 +1,7 @@
 // Captures the README media from a running LexAgent in demo mode (LLM_API_KEY empty):
 // screenshots and PDF page previews.
 // Usage: node docs/readme/capture.mjs [shots,pdf] [baseUrl]
-// Needs: docs/readme/sample-report.pdf and sample-report-hi.pdf (scripts/render-sample-pdf.tsx), and ffmpeg on PATH.
+// Needs: docs/readme/sample-report.pdf (scripts/render-sample-pdf.tsx) and ffmpeg on PATH.
 import { chromium } from "playwright";
 import { execFileSync } from "node:child_process";
 import { readFileSync, rmSync } from "node:fs";
@@ -55,33 +55,27 @@ if (ONLY.includes("shots")) {
     await ctx.close();
   }
   {
-    // README hero: a Marathi district-court case uploaded and analysed (demo mode recognises the sample file).
+    // README hero: an English case file uploaded as a PDF and analysed (demo mode recognises the sample file).
     const ctx = await context({});
     const page = await ctx.newPage();
     await page.goto(`${BASE}/dashboard`);
-    await page.locator("input[type=file]").setInputFiles(join(here, "../../sample-cases/06-farm-road-injunction-marathi.docx"));
+    await page.locator("input[type=file]").setInputFiles(join(here, "../../sample-cases/03-job-fraud-cheating-bns.pdf"));
     await page.locator(".file-pill").waitFor();
     await page.locator(".analyze-btn").click();
     await page.locator(".results-bar .btn-primary").waitFor({ timeout: 30_000 });
     await page.evaluate(() => window.scrollTo(0, document.querySelector(".dash-grid").offsetTop - 90));
     await wait(500);
-    await page.screenshot({ path: join(here, "dashboard-marathi.png") });
+    await page.screenshot({ path: join(here, "dashboard-hero.png") });
     await ctx.close();
   }
   {
-    const ctx = await context({ lang: "hi" });
-    const page = await ctx.newPage();
-    await page.goto(BASE);
-    await wait(6500);
-    await page.screenshot({ path: join(here, "landing-hi.png") });
-    await ctx.close();
-  }
-  {
-    const ctx = await context({ lang: "mr", session: false });
+    const ctx = await context({ session: false });
     const page = await ctx.newPage();
     await page.goto(`${BASE}/signup`);
     await wait(1200);
-    await page.locator(".auth-card").screenshot({ path: join(here, "signup-roles-mr.png") });
+    // The sticky header would overlap the card while Playwright scrolls to it.
+    await page.addStyleTag({ content: ".site-header{position:static!important}" });
+    await page.locator(".auth-card").screenshot({ path: join(here, "signup-roles.png") });
     await ctx.close();
   }
   {
@@ -98,7 +92,7 @@ if (ONLY.includes("shots")) {
 
 // Screenshots are converted to JPEG (the paper grain makes PNGs several MB each).
 if (ONLY.includes("shots")) {
-  for (const f of ["dashboard-marathi", "landing-light", "landing-dark", "landing-hi", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark", "signup-roles-mr"]) {
+  for (const f of ["dashboard-hero", "landing-light", "landing-dark", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark", "signup-roles"]) {
     execFileSync("ffmpeg", ["-v", "error", "-y", "-i", join(here, `${f}.png`), "-q:v", "3", join(here, `${f}.jpg`)]);
     rmSync(join(here, `${f}.png`));
   }
@@ -108,7 +102,6 @@ if (ONLY.includes("shots")) {
 if (ONLY.includes("pdf")) {
   for (const [pdfFile, prefix, count] of [
     ["sample-report.pdf", "report-page", 3],
-    ["sample-report-hi.pdf", "report-hi-page", 1],
   ]) {
     const ctx = await browser.newContext({ viewport: { width: 900, height: 1200 }, deviceScaleFactor: 1.5 });
     const files = {

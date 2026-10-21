@@ -17,10 +17,10 @@
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16">
   <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript strict">
   <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-0b0b0b" alt="Works with Mistral, Groq or Gemini">
-  <img src="https://img.shields.io/badge/languages-English_·_हिन्दी_·_मराठी-444444" alt="English, Hindi and Marathi">
+  <img src="https://img.shields.io/badge/languages-English_·_Hindi_·_Marathi-444444" alt="English, Hindi and Marathi">
   <img src="https://img.shields.io/badge/case_files-any_Indian_language-0b0b0b" alt="Case files in any Indian language">
   <img src="https://img.shields.io/badge/tests-23_passing-2d7d4f" alt="23 tests passing">
-  <img src="https://img.shields.io/badge/OCR-मराठी_·_हिन्दी_·_English-444444" alt="OCR for Marathi, Hindi and English">
+  <img src="https://img.shields.io/badge/OCR-Marathi_·_Hindi_·_English-444444" alt="OCR for Marathi, Hindi and English">
   <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-0b0b0b" alt="Knows BNS, BNSS and BSA">
 </p>
 
@@ -45,11 +45,11 @@
 ## 🎬 See it in action
 
 <p align="center">
-  <a href="https://lexagent-ai.vercel.app"><img src="docs/readme/dashboard-marathi.jpg" alt="A Marathi district-court case file uploaded and analysed by the four agents" width="100%"></a>
+  <a href="https://lexagent-ai.vercel.app"><img src="docs/readme/dashboard-hero.jpg" alt="A case file uploaded as a PDF and analysed by the four agents" width="100%"></a>
 </p>
 
 <p align="center"><b>🌐 Try it live: <a href="https://lexagent-ai.vercel.app">lexagent-ai.vercel.app</a></b><br>
-<sub>A Marathi district-court case file, read by the four agents. Sign up, pick a sample case, and press Analyze Case.</sub></p>
+<sub>A bail application uploaded as a PDF and read by the four agents. Sign up, pick a sample case, and press Analyze Case.</sub></p>
 
 ---
 
@@ -196,16 +196,8 @@ Urdu, English or a mix**, in the original, and say which language the document i
 report all follow, whatever language the case file is in. At sign-up you pick who you are, and the agents adjust their
 depth and tone.
 
-<table>
-  <tr>
-    <td width="58%"><img src="docs/readme/landing-hi.jpg" alt="LexAgent landing page in Hindi"></td>
-    <td width="42%"><img src="docs/readme/signup-roles-mr.jpg" alt="Sign-up form in Marathi with the role picker"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Landing page in हिन्दी</sub></td>
-    <td align="center"><sub>Sign-up in मराठी with the role picker</sub></td>
-  </tr>
-</table>
+<p align="center"><img src="docs/readme/signup-roles.jpg" alt="Sign-up form with the role picker" width="460"><br>
+<sub>Sign-up with the role picker. The <b>EN · हि · म</b> switch in the header changes the language everywhere.</sub></p>
 
 | Role | How the agents write for you |
 |---|---|
@@ -231,20 +223,18 @@ disclaimer on every page. Hindi and Marathi reports embed a Devanagari font.
 
 <table>
   <tr>
-    <td width="25%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-1.png" alt="Report page 1: header, confidence seal, summary and timeline"></a></td>
-    <td width="25%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-2.png" alt="Report page 2: legal insights, arguments and laws table"></a></td>
-    <td width="25%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-3.png" alt="Report page 3: comparison and final analysis"></a></td>
-    <td width="25%"><a href="docs/readme/sample-report-hi.pdf"><img src="docs/readme/report-hi-page-1.png" alt="Hindi report, page 1"></a></td>
+    <td width="33%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-1.png" alt="Report page 1: header, confidence seal, summary and timeline"></a></td>
+    <td width="33%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-2.png" alt="Report page 2: legal insights, arguments and laws table"></a></td>
+    <td width="33%"><a href="docs/readme/sample-report.pdf"><img src="docs/readme/report-page-3.png" alt="Report page 3: comparison and final analysis"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>Cover, seal and summary</sub></td>
     <td align="center"><sub>Insights and laws table</sub></td>
     <td align="center"><sub>Cross-check and final analysis</sub></td>
-    <td align="center"><sub>हिन्दी report</sub></td>
   </tr>
 </table>
 
-<p align="center"><a href="docs/readme/sample-report.pdf"><b>📄 Open the English sample report</b></a> · <a href="docs/readme/sample-report-hi.pdf"><b>हिन्दी नमूना रिपोर्ट</b></a></p>
+<p align="center"><a href="docs/readme/sample-report.pdf"><b>📄 Open the sample report</b></a> · <a href="docs/readme/sample-report-hi.pdf">Hindi version (PDF)</a></p>
 
 ---
 
