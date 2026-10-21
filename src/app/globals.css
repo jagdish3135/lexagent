@@ -5,97 +5,66 @@
    ========================================================================== */
 
 :root {
-  --paper: #f3f7f7;
-  --paper-2: #e4eeee;
-  --sheet: #fbfdfd;
-  --ink: #0f2a2e;
-  --ink-2: #2b4549;
-  --muted: #587073;
-  --rule: #cddddd;
-  --primary: #0e6a6f;
+  --paper: #ffffff;
+  --paper-2: #f4f4f2;
+  --sheet: #ffffff;
+  --ink: #0b0b0b;
+  --ink-2: #2b2b2b;
+  --muted: #6b6b6b;
+  --rule: #e2e2e2;
+  --primary: #0b0b0b;
   --on-primary: #ffffff;
-  --band: #0b4f53;
-  --on-band: #eaf6f5;
-  --seal: #e5674e;
-  --seal-ink: #b8442c;
-  --on-ink: #f3f7f7;
-  --focus: #e5674e;
-  --danger: #b8361f;
+  --band: #0b0b0b;
+  --on-band: #ffffff;
+  --seal: #0b0b0b;
+  --seal-ink: #0b0b0b;
+  --offset: #c4c4c4;
+  --on-ink: #ffffff;
+  --focus: #0b0b0b;
+  --danger: #b42318;
   --blue: #2f5bd3;
-  --blue-soft: #e3eafb;
+  --blue-soft: #e8eefc;
   --amber: #a8690f;
-  --amber-soft: #f8ecd2;
+  --amber-soft: #f9efd9;
   --green: #2d7d4f;
-  --green-soft: #ddf0e3;
+  --green-soft: #e3f3e8;
   --red: #c2412d;
-  --red-soft: #fbe3dd;
-  --shadow: 0 1px 0 rgba(15, 42, 46, 0.05), 0 18px 40px -24px rgba(11, 79, 83, 0.35);
-  --grain-opacity: 0.18;
-  --serif: var(--font-serif), "Iowan Old Style", Georgia, serif;
-  --sans: var(--font-sans), "Segoe UI", system-ui, sans-serif;
-  --mono: var(--font-mono), ui-monospace, "Cascadia Mono", monospace;
+  --red-soft: #fbe7e2;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 18px 40px -26px rgba(0, 0, 0, 0.28);
+  /* Noto Devanagari follows each Latin font, so Hindi/Marathi case text renders well in any interface language. */
+  --serif: var(--font-serif), var(--font-deva-serif), "Iowan Old Style", Georgia, serif;
+  --sans: var(--font-sans), var(--font-deva-sans), "Segoe UI", system-ui, sans-serif;
+  --mono: var(--font-mono), var(--font-deva-sans), ui-monospace, "Cascadia Mono", monospace;
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #0a1a1c;
-    --paper-2: #0f2427;
-    --sheet: #112a2d;
-    --ink: #e4f0ef;
-    --ink-2: #c3d6d5;
-    --muted: #8ea8a8;
-    --rule: #234044;
-    --primary: #4fc1be;
-    --on-primary: #062124;
-    --band: #0e3a3d;
-    --on-band: #e4f0ef;
-    --seal: #ff8a70;
-    --seal-ink: #ff9c86;
-    --on-ink: #0a1a1c;
-    --focus: #ff8a70;
-    --danger: #ff8f7a;
-    --blue: #8fb0ff;
-    --blue-soft: #18284a;
-    --amber: #f3c065;
-    --amber-soft: #2e2512;
-    --green: #7fd69b;
-    --green-soft: #12301f;
-    --red: #ff8e78;
-    --red-soft: #3a1a14;
-    --shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
-    --grain-opacity: 0.08;
-    color-scheme: dark;
-  }
-}
-
 :root[data-theme="dark"] {
-  --paper: #0a1a1c;
-  --paper-2: #0f2427;
-  --sheet: #112a2d;
-  --ink: #e4f0ef;
-  --ink-2: #c3d6d5;
-  --muted: #8ea8a8;
-  --rule: #234044;
-  --primary: #4fc1be;
-  --on-primary: #062124;
-  --band: #0e3a3d;
-  --on-band: #e4f0ef;
-  --seal: #ff8a70;
-  --seal-ink: #ff9c86;
-  --on-ink: #0a1a1c;
-  --focus: #ff8a70;
+  --paper: #0b0b0b;
+  --paper-2: #161616;
+  --sheet: #121212;
+  --ink: #f2f2f2;
+  --ink-2: #cfcfcf;
+  --muted: #9a9a9a;
+  --rule: #2a2a2a;
+  --primary: #f2f2f2;
+  --on-primary: #0b0b0b;
+  --band: #f2f2f2;
+  --on-band: #0b0b0b;
+  --seal: #f2f2f2;
+  --seal-ink: #f2f2f2;
+  --offset: #4a4a4a;
+  --on-ink: #0b0b0b;
+  --focus: #f2f2f2;
   --danger: #ff8f7a;
   --blue: #8fb0ff;
-  --blue-soft: #18284a;
+  --blue-soft: #18223a;
   --amber: #f3c065;
-  --amber-soft: #2e2512;
+  --amber-soft: #2b2312;
   --green: #7fd69b;
-  --green-soft: #12301f;
+  --green-soft: #12291a;
   --red: #ff8e78;
-  --red-soft: #3a1a14;
-  --shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
-  --grain-opacity: 0.08;
+  --red-soft: #351813;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 18px 40px -24px rgba(0, 0, 0, 0.9);
   color-scheme: dark;
 }
 
@@ -119,25 +88,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Newsprint grain over everything (decorative, never blocks clicks). */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: var(--grain-opacity);
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.42  0 0 0 0 0.42  0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-:root[data-theme="dark"] body::before {
-  mix-blend-mode: screen;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) body::before {
-    mix-blend-mode: screen;
-  }
-}
 
 h1,
 h2,
@@ -235,15 +185,15 @@ em {
 .btn-primary {
   background: var(--primary);
   color: var(--on-primary);
-  box-shadow: 4px 4px 0 var(--seal);
+  box-shadow: 4px 4px 0 var(--offset);
 }
 .btn-primary:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--seal);
+  box-shadow: 6px 6px 0 var(--offset);
 }
 .btn-primary:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--seal);
+  box-shadow: 1px 1px 0 var(--offset);
 }
 .btn-ghost:hover {
   background: var(--primary);
@@ -878,7 +828,7 @@ em {
   border-color: var(--on-band);
   background: var(--on-band);
   color: var(--band);
-  box-shadow: 4px 4px 0 var(--seal);
+  box-shadow: 4px 4px 0 var(--offset);
 }
 .big-stamp {
   position: relative;
@@ -1726,7 +1676,7 @@ td.sec {
 .role-opt:has(input:checked) {
   border-color: var(--primary);
   background: color-mix(in srgb, var(--primary) 9%, var(--sheet));
-  box-shadow: inset 4px 0 0 var(--seal);
+  box-shadow: inset 4px 0 0 var(--ink);
 }
 .role-opt:has(input:focus-visible) {
   outline: 2px solid var(--focus);
@@ -1767,5 +1717,12 @@ td.sec {
   text-transform: uppercase;
 }
 .big-stamp big {
+  text-transform: none;
+}
+
+/* Case details (type, court, language) can be in any script: use the text font, not the monospace label style. */
+.meta-chips .chip {
+  font: 500 13px/1.4 var(--sans);
+  letter-spacing: 0;
   text-transform: none;
 }

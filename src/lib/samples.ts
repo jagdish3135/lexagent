@@ -1,8 +1,11 @@
 import type { AgentOutputs } from "./schemas";
+import { EXTRA_SAMPLES } from "./samples-extra";
 
 // Fictional sample cases. Names, numbers and parties are invented for demonstration.
 export interface SampleCase {
   id: string;
+  /** File name (without extension) in sample-cases/. */
+  slug: string;
   label: string;
   hint: string;
   text: string;
@@ -75,9 +78,10 @@ REPLY OF OPPOSITE PARTY No. 2 (Manufacturer)
 
 The complaint is filed on 05.08.2025, within two years of the cause of action. The value of the claim is within the pecuniary jurisdiction of this Commission.`;
 
-export const SAMPLES: SampleCase[] = [
+const BASE_SAMPLES: SampleCase[] = [
   {
     id: "cheque",
+    slug: "01-cheque-bounce-ni-act",
     label: "Cheque bounce",
     hint: "NI Act s.138 · Pune",
     text: chequeText,
@@ -86,6 +90,7 @@ export const SAMPLES: SampleCase[] = [
         title: "Shree Ganesh Traders v. Rakesh Patil",
         caseType: "Criminal complaint - cheque dishonour",
         court: "Judicial Magistrate First Class, Pune",
+        documentLanguage: "English",
         plainSummary: [
           "A hardware dealer, Shree Ganesh Traders, says it sold building material worth Rs. 4.8 lakh to Rakesh Patil on credit in late 2024.",
           "To pay most of this, Mr. Patil gave a cheque for Rs. 4.5 lakh. When the dealer deposited it in January 2025, the bank returned it because there was not enough money in the account.",
@@ -203,6 +208,7 @@ export const SAMPLES: SampleCase[] = [
   },
   {
     id: "consumer",
+    slug: "02-defective-phone-consumer",
     label: "Defective phone",
     hint: "Consumer Protection Act · Nashik",
     text: consumerText,
@@ -211,6 +217,7 @@ export const SAMPLES: SampleCase[] = [
         title: "Priya Kulkarni v. Zenith Electronics & Novaphone India",
         caseType: "Consumer complaint - defective product and deficiency in service",
         court: "District Consumer Disputes Redressal Commission, Nashik",
+        documentLanguage: "English",
         plainSummary: [
           "Priya Kulkarni bought a Rs. 62,999 smartphone in March 2025. Within about two months it started overheating and the screen stopped working.",
           "She took it to the company's authorised service centre three times, but the problem was never fixed. On the third visit the centre refused free repair, saying the phone had water damage.",
@@ -326,3 +333,12 @@ export const SAMPLES: SampleCase[] = [
     },
   },
 ];
+
+export const SAMPLES: SampleCase[] = [...BASE_SAMPLES, ...EXTRA_SAMPLES];
+
+/** File formats shipped for a sample. Hindi/Marathi ones skip PDF: PDF text layers break Devanagari. */
+export const sampleFormats = (s: SampleCase): readonly ("pdf" | "docx" | "txt")[] =>
+  /[ऀ-ॿ]/.test(s.text) ? ["docx", "txt"] : ["pdf", "docx", "txt"];
+
+/** Samples shown as one-click buttons on the dashboard (the rest are downloadable files). */
+export const SAMPLE_BUTTONS = ["cheque", "consumer", "farmroad", "maintenance"];

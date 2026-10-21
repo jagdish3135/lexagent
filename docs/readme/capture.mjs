@@ -183,10 +183,11 @@ if (ONLY.includes("video")) {
   await page.getByRole("button", { name: "Create account" }).click();
   await page.getByRole("button", { name: /Cheque bounce/ }).waitFor();
   await wait(1200);
-  await page.getByRole("button", { name: "हि" }).click(); // switch the interface to Hindi
+  await page.getByRole("button", { name: "म" }).click(); // switch the interface to Marathi
   await wait(1500);
-  await page.getByRole("button", { name: /चेक बाउंस/ }).click();
-  await wait(900);
+  // Upload a Marathi district-court case file (DOCX), as a user would.
+  await page.locator('input[type=file]').setInputFiles(join(here, "../../sample-cases/06-farm-road-injunction-marathi.docx"));
+  await wait(1600);
   await page.locator(".analyze-btn").click();
   await page.locator(".results-bar .btn-primary").waitFor({ timeout: 30_000 });
   await wait(1400);

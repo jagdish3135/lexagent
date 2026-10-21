@@ -11,14 +11,15 @@ export interface ReportInfo {
   lang: Lang;
 }
 
+// Black and white, like the app; the four agent colours are the only colour.
 const C = {
-  band: "#0B4F53",
-  coral: "#E5674E",
-  paper: "#F3F7F7",
-  ink: "#0F2A2E",
-  muted: "#587073",
-  line: "#CDDDDD",
-  onBand: "#EAF6F5",
+  band: "#0B0B0B",
+  coral: "#0B0B0B",
+  paper: "#F4F4F2",
+  ink: "#0B0B0B",
+  muted: "#6B6B6B",
+  line: "#E2E2E2",
+  onBand: "#FFFFFF",
   blue: ["#2F5BD3", "#E3EAFB"],
   amber: ["#A8690F", "#F8ECD2"],
   green: ["#2D7D4F", "#DDF0E3"],
@@ -40,16 +41,18 @@ export function registerFonts(base: string) {
   Font.registerHyphenationCallback((word) => [word]);
 }
 
+export const needsDevanagari = (outputs: AgentOutputs, lang: Lang) => lang !== "en" || /[ऀ-ॿ]/.test(JSON.stringify(outputs));
+
 function makeStyles(F: typeof LATIN) {
   return StyleSheet.create({
     page: { paddingTop: 36, paddingBottom: 60, paddingHorizontal: 40, fontFamily: F.body, fontSize: 10, color: C.ink, lineHeight: 1.45 },
     band: { marginTop: -36, marginHorizontal: -40, paddingVertical: 22, paddingHorizontal: 40, backgroundColor: C.band, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
     brand: { flexDirection: "row", alignItems: "center" },
     brandName: { fontFamily: "Times-Bold", fontSize: 22, lineHeight: 1, color: "#FFFFFF", marginLeft: 10 },
-    brandSub: { fontFamily: F.bold, fontSize: 7.5, lineHeight: 1.2, color: "#FF9C86", letterSpacing: 1.6 * F.spacing, marginLeft: 10, marginTop: 6 },
+    brandSub: { fontFamily: F.bold, fontSize: 7.5, lineHeight: 1.2, color: "#BDBDBD", letterSpacing: 1.6 * F.spacing, marginLeft: 10, marginTop: 6 },
     bandMeta: { alignItems: "flex-end" },
     bandMetaText: { color: C.onBand, fontSize: 8.5 },
-    coralRule: { marginHorizontal: -40, height: 4, backgroundColor: C.coral },
+    coralRule: { marginHorizontal: -40, height: 3, backgroundColor: "#BDBDBD" },
     titleRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 22, marginBottom: 14 },
     title: { fontFamily: F.serif, fontSize: 19, color: C.band, lineHeight: 1.25 },
     subtitle: { fontSize: 9.5, color: C.muted, marginTop: 4 },
@@ -89,7 +92,7 @@ function makeStyles(F: typeof LATIN) {
     discText: { color: C.onBand, fontSize: 8.5 },
     footRule: { position: "absolute", bottom: 42, left: 40, width: 515.28, height: 0.8, backgroundColor: C.line },
     footPill: { position: "absolute", bottom: 22, left: 40, flexDirection: "row" },
-    pillA: { borderTopLeftRadius: 3, borderBottomLeftRadius: 3, backgroundColor: C.band, color: "#FFFFFF", fontSize: 7, fontFamily: F.bold, paddingVertical: 3, paddingHorizontal: 5 },
+    pillA: { borderTopLeftRadius: 3, borderBottomLeftRadius: 3, borderWidth: 0.8, borderColor: C.band, backgroundColor: "#FFFFFF", color: C.band, fontSize: 7, fontFamily: F.bold, paddingVertical: 3, paddingHorizontal: 5 },
     pillB: { borderTopRightRadius: 3, borderBottomRightRadius: 3, backgroundColor: C.coral, color: "#FFFFFF", fontSize: 7, fontFamily: "Helvetica-Bold", paddingVertical: 3, paddingHorizontal: 5 },
     footText: { position: "absolute", bottom: 24, fontSize: 7.5, color: C.muted },
   });
@@ -98,24 +101,25 @@ function makeStyles(F: typeof LATIN) {
 function Mark({ size = 30 }: { size?: number }) {
   return (
     <Svg width={size} height={size} viewBox="0 0 64 64">
-      <Rect x="0" y="0" width="64" height="64" fill="#0E6A6F" />
+      <Rect x="0" y="0" width="64" height="64" fill="#0B0B0B" />
       <Path d="M32 14v34M22 48h20M18 22h28" stroke="#FFFFFF" strokeWidth={3.6} strokeLinecap="round" />
       <Path d="M18 22l-7 14h14zM46 22l-7 14h14z" stroke="#FFFFFF" strokeWidth={3.6} strokeLinejoin="round" fill="none" />
-      <Circle cx="32" cy="14" r="3.6" fill={C.coral} />
+      <Circle cx="32" cy="14" r="3.6" fill="#FFFFFF" />
     </Svg>
   );
 }
 
 export function ReportDoc({ outputs, info, date }: { outputs: AgentOutputs; info: ReportInfo; date: string }) {
   const { summarizer: sum, analyst: ins, verifier: ver, chief: fin } = outputs;
-  const F = info.lang === "en" ? LATIN : DEVA;
+  // Devanagari font whenever the labels or the content need it (e.g. a Marathi case with an English interface).
+  const deva = needsDevanagari(outputs, info.lang);
+  const F = deva ? DEVA : LATIN;
   const s = makeStyles(F);
   const t = translator(info.lang);
-  const up = (k: Key) => (info.lang === "en" ? t(k).toUpperCase() : t(k));
+  const up = (k: Key) => (deva ? t(k) : t(k).toUpperCase());
 
   // react-pdf misplaces line breaks inside Devanagari words (and can drop the last characters of a line),
   // so Hindi/Marathi text is laid out word by word in a wrapping row. English keeps normal text layout.
-  const deva = info.lang !== "en";
   const tx = (text: string, style: Style = {}, box: Style = {}, fontSize = 10) =>
     deva ? (
       <View style={[{ flexDirection: "row", flexWrap: "wrap" }, box]}>
@@ -208,7 +212,7 @@ export function ReportDoc({ outputs, info, date }: { outputs: AgentOutputs; info
         <View style={s.titleRow}>
           <View style={{ flex: 1 }}>
             {tx(sum?.title || t("r.caseSummary"), s.title, {}, 19)}
-            {tx([sum?.caseType, sum?.court].filter(Boolean).join("  ·  "), s.subtitle, { marginTop: 4 }, 9.5)}
+            {tx([sum?.caseType, sum?.court, sum?.documentLanguage && t("r.docLang", { lang: sum.documentLanguage })].filter(Boolean).join("  ·  "), s.subtitle, { marginTop: 4 }, 9.5)}
           </View>
           <View style={s.seal}>
             <View style={s.sealIn}>

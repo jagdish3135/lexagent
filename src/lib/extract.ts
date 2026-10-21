@@ -1,4 +1,5 @@
 "use client";
+import { joinTextItems, looksDamagedDevanagari } from "./pdf-text";
 
 // Text extraction runs in the browser, so case files are never uploaded as files: only their text is sent.
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
@@ -6,7 +7,7 @@ export const ACCEPT = ".pdf,.docx,.txt,application/pdf,application/vnd.openxmlfo
 
 /** `code` is a translation key for the message shown to the user. */
 export class ExtractError extends Error {
-  constructor(public code: "err.tooBig" | "err.doc" | "err.type" | "err.scanned" | "err.emptyFile") {
+  constructor(public code: "err.tooBig" | "err.doc" | "err.type" | "err.scanned" | "err.emptyFile" | "err.damaged") {
     super(code);
   }
 }
@@ -33,6 +34,9 @@ export async function extractText(file: File): Promise<string> {
   if (!clean) {
     throw new ExtractError(name.endsWith(".pdf") ? "err.scanned" : "err.emptyFile");
   }
+  // Many Hindi/Marathi PDFs have no proper text mapping, so their text comes out broken. Better to say so
+  // than to send garbled text to the agents.
+  if (name.endsWith(".pdf") && looksDamagedDevanagari(clean)) throw new ExtractError("err.damaged");
   return clean;
 }
 
@@ -44,12 +48,7 @@ async function pdfText(data: ArrayBuffer): Promise<string> {
   const pages: string[] = [];
   for (let i = 1; i <= doc.numPages; i++) {
     const content = await (await doc.getPage(i)).getTextContent();
-    pages.push(
-      content.items
-        .map((item) => ("str" in item ? item.str + (item.hasEOL ? "\n" : " ") : ""))
-        .join("")
-        .replace(/ +/g, " "),
-    );
+    pages.push(joinTextItems(content.items.filter((item) => "str" in item)).replace(/ +/g, " "));
   }
   await task.destroy();
   return pages.join("\n\n");

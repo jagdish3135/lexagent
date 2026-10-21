@@ -2,20 +2,14 @@
 import { useSyncExternalStore } from "react";
 import { writeKey } from "@/lib/client-store";
 
+// Light is the default whatever the system setting; dark only when the user chooses it.
 function currentTheme(): "light" | "dark" {
-  const set = document.documentElement.dataset.theme;
-  if (set === "light" || set === "dark") return set;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
 function subscribe(cb: () => void) {
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  mq.addEventListener("change", cb);
   window.addEventListener("lexagent:storage", cb);
-  return () => {
-    mq.removeEventListener("change", cb);
-    window.removeEventListener("lexagent:storage", cb);
-  };
+  return () => window.removeEventListener("lexagent:storage", cb);
 }
 
 export function ThemeToggle() {

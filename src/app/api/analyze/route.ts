@@ -1,5 +1,5 @@
 import { runPipeline } from "@/lib/agents";
-import { demoChat } from "@/lib/demo";
+import { demoChat, matchSample } from "@/lib/demo";
 import { configFromEnv, createChatJson } from "@/lib/llm";
 import { allow } from "@/lib/rate-limit";
 import { isLang, isRole } from "@/lib/locale";
@@ -40,7 +40,9 @@ export async function POST(req: Request) {
   const limit = maxChars();
   const truncated = text.length > limit;
   const caseText = truncated ? text.slice(0, limit) : text;
-  const chat = cfg ? createChatJson(cfg) : demoChat(caseText, Number(process.env.DEMO_DELAY_MS ?? 1200)).chat;
+  // Demo mode only answers for the built-in sample cases; it never shows another case's analysis.
+  const sample = cfg ? undefined : matchSample(caseText);
+  const chat = cfg ? createChatJson(cfg) : sample ? demoChat(sample, Number(process.env.DEMO_DELAY_MS ?? 1200)) : null;
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
@@ -55,6 +57,15 @@ export async function POST(req: Request) {
         }
       };
       emit({ type: "meta", mode: cfg ? "live" : "demo", model: cfg?.model ?? "demo", truncated, chars: caseText.length });
+      if (!chat) {
+        emit({
+          type: "error",
+          code: "demo-only",
+          error: "Demo mode can only analyse the sample cases. Add an AI key on the server to analyse your own document.",
+        });
+        controller.close();
+        return;
+      }
       try {
         await runPipeline(caseText, chat, emit, audience);
         emit({ type: "end" });

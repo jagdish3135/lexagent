@@ -17,3 +17,4 @@
 {"ts":"2026-10-20T21:35:50+05:30","type":"commit","agent":"tech-writer","task":"9","msg":"README with animated banner, pipeline, screenshots, demo GIF/MP4 and sample report"}
 {"ts":"2026-10-20T22:58:13+05:30","type":"commit","agent":"ux-designer","msg":"UI redesign 'The Gazette' + refreshed README media; zero-quota key message"}
 {"ts":"2026-10-20T23:10:47+05:30","type":"phase","agent":"devops","phase":"ship","msg":"Public repo github.com/jagdish3135/lexagent; live at lexagent-phi.vercel.app; smoke test passed (pages, API, PDF export)"}
+{"ts":"2026-10-21T10:14:35+05:30","type":"note","agent":"manager","msg":"B/W theme (light default), local-language case documents, Marathi/Hindi samples, honest demo mode (no wrong-case analyses); 21 tests pass; not pushed"}

@@ -10,14 +10,14 @@ const SANS = "'Segoe UI', Helvetica, Arial, sans-serif";
 
 const THEMES = {
   dark: {
-    bg: "#0a1a1c", bg2: "#0f2427", card: "#112a2d", line: "#234044", ink: "#e4f0ef", muted: "#8ea8a8",
-    accent: "#ff8a70", primary: "#4fc1be", tile: "#4fc1be", tileInk: "#062124", chip: "#112a2d",
-    agents: [["#8fb0ff", "#18284a"], ["#f3c065", "#2e2512"], ["#7fd69b", "#12301f"], ["#ff8e78", "#3a1a14"]],
+    bg: "#0b0b0b", bg2: "#141414", card: "#121212", line: "#2a2a2a", ink: "#f2f2f2", muted: "#9a9a9a",
+    accent: "#f2f2f2", primary: "#f2f2f2", tile: "#f2f2f2", tileInk: "#0b0b0b", chip: "#121212",
+    agents: [["#8fb0ff", "#18223a"], ["#f3c065", "#2b2312"], ["#7fd69b", "#12291a"], ["#ff8e78", "#351813"]],
   },
   light: {
-    bg: "#f3f7f7", bg2: "#e4eeee", card: "#fbfdfd", line: "#cddddd", ink: "#0f2a2e", muted: "#587073",
-    accent: "#d4583f", primary: "#0e6a6f", tile: "#0e6a6f", tileInk: "#ffffff", chip: "#fbfdfd",
-    agents: [["#2f5bd3", "#e3eafb"], ["#a8690f", "#f8ecd2"], ["#2d7d4f", "#ddf0e3"], ["#c2412d", "#fbe3dd"]],
+    bg: "#ffffff", bg2: "#f4f4f2", card: "#ffffff", line: "#e2e2e2", ink: "#0b0b0b", muted: "#6b6b6b",
+    accent: "#0b0b0b", primary: "#0b0b0b", tile: "#0b0b0b", tileInk: "#ffffff", chip: "#ffffff",
+    agents: [["#2f5bd3", "#e8eefc"], ["#a8690f", "#f9efd9"], ["#2d7d4f", "#e3f3e8"], ["#c2412d", "#fbe7e2"]],
   },
 };
 
@@ -36,7 +36,7 @@ const mark = (x, y, size, t) => `
     <g fill="none" stroke="${t.tileInk}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M32 14v34M22 48h20M18 22h28"/><path d="M18 22l-7 14h14zM46 22l-7 14h14z"/>
     </g>
-    <circle cx="32" cy="14" r="3.6" fill="${t.accent}"/>
+    <circle cx="32" cy="14" r="3.6" fill="${t.tileInk}"/>
   </g>`;
 
 function banner(t) {

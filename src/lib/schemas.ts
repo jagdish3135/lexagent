@@ -9,6 +9,7 @@ export const summarySchema = z.object({
   title: text,
   caseType: text,
   court: text,
+  documentLanguage: text,
   plainSummary: list,
   parties: z.array(z.object({ name: text, role: text })).catch([]),
   timeline: z.array(z.object({ date: text, event: text })).catch([]),
@@ -57,7 +58,7 @@ export type StreamEvent =
   | { type: "meta"; mode: "live" | "demo"; model: string; truncated: boolean; chars: number }
   | { type: "status"; agent: AgentId; status: AgentStatus; output?: unknown; error?: string }
   | { type: "end" }
-  | { type: "error"; error: string };
+  | { type: "error"; error: string; code?: "demo-only" };
 
 export const AGENTS: { id: AgentId; name: string; role: string; section: string; color: string }[] = [
   { id: "summarizer", name: "Summarizer", role: "Explains the case in plain language", section: "Summary", color: "blue" },

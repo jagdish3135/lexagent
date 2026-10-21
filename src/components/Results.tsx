@@ -35,6 +35,7 @@ export function SummaryCard({ data }: { data: Summary }) {
         <div className="meta-chips">
           {data.caseType && <span className="chip">{data.caseType}</span>}
           {data.court && <span className="chip">{data.court}</span>}
+          {data.documentLanguage && <span className="chip">{t("r.docLang", { lang: data.documentLanguage })}</span>}
         </div>
       </div>
       <div>

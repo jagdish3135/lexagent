@@ -8,19 +8,20 @@
 </p>
 
 <p align="center">
-  <a href="https://lexagent-phi.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-0e6a6f?style=for-the-badge" alt="Try LexAgent live"></a>
-  <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-e5674e?style=for-the-badge" alt="Watch the demo"></a>
-  <a href="sample-cases"><img src="https://img.shields.io/badge/📂_Sample_cases-0f2a2e?style=for-the-badge" alt="Sample case files"></a>
-  <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-e5674e?style=for-the-badge" alt="Open a sample PDF report"></a>
+  <a href="https://lexagent-phi.vercel.app"><img src="https://img.shields.io/badge/⚖_Try_LexAgent_live-0b0b0b?style=for-the-badge" alt="Try LexAgent live"></a>
+  <a href="#-see-it-in-action"><img src="https://img.shields.io/badge/▶_Watch_the_demo-444444?style=for-the-badge" alt="Watch the demo"></a>
+  <a href="sample-cases"><img src="https://img.shields.io/badge/📂_Sample_cases-0b0b0b?style=for-the-badge" alt="Sample case files"></a>
+  <a href="docs/readme/sample-report.pdf"><img src="https://img.shields.io/badge/📄_Sample_PDF_report-444444?style=for-the-badge" alt="Open a sample PDF report"></a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16">
   <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript strict">
-  <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-0e6a6f" alt="Works with Mistral, Groq or Gemini">
-  <img src="https://img.shields.io/badge/languages-English_·_हिन्दी_·_मराठी-e5674e" alt="English, Hindi and Marathi">
-  <img src="https://img.shields.io/badge/tests-12_passing-2d7d4f" alt="12 tests passing">
-  <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-0f2a2e" alt="Knows BNS, BNSS and BSA">
+  <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-0b0b0b" alt="Works with Mistral, Groq or Gemini">
+  <img src="https://img.shields.io/badge/languages-English_·_हिन्दी_·_मराठी-444444" alt="English, Hindi and Marathi">
+  <img src="https://img.shields.io/badge/case_files-any_Indian_language-0b0b0b" alt="Case files in any Indian language">
+  <img src="https://img.shields.io/badge/tests-21_passing-2d7d4f" alt="12 tests passing">
+  <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-0b0b0b" alt="Knows BNS, BNSS and BSA">
 </p>
 
 <p align="center">
@@ -44,12 +45,12 @@
 ## 🎬 See it in action
 
 <p align="center">
-  <a href="docs/readme/demo.mp4"><img src="docs/readme/demo.webp" alt="Choosing a sample case, four agents working live in the Hindi interface, results appearing, PDF export" width="100%"></a>
+  <a href="docs/readme/demo.mp4"><img src="docs/readme/demo.webp" alt="Uploading a Marathi district-court case file, four agents working live, the Marathi analysis appearing, PDF export" width="100%"></a>
 </p>
 
 <p align="center"><b>🌐 Live: <a href="https://lexagent-phi.vercel.app">lexagent-phi.vercel.app</a></b></p>
 
-<p align="center"><sub>▶ <a href="docs/readme/demo.mp4"><b>Watch the full walkthrough in 1080p (MP4)</b></a>: landing page → sign up as an advocate → switch to हिन्दी → sample case → four agents live → results → PDF export<br>
+<p align="center"><sub>▶ <a href="docs/readme/demo.mp4"><b>Watch the full walkthrough in 1080p (MP4)</b></a>: landing page → sign up as an advocate → switch to मराठी → upload a Marathi case file → four agents live → results → PDF export<br>
 Preview not moving? <a href="docs/readme/demo.gif">Open the GIF version</a>.</sub></p>
 
 ---
@@ -75,6 +76,10 @@ Citizens often can't follow it at all, and lawyers and judges spend hours on the
   <tr>
     <td>Trust a single AI answer that may be confidently wrong</td>
     <td>Two agents read independently and a third <b>cross-checks</b> them, with a confidence level</td>
+  </tr>
+  <tr>
+    <td>District-court files in Marathi or Hindi that most tools can't read</td>
+    <td>Upload case documents in <b>any Indian language</b>; the agents read them in the original</td>
   </tr>
   <tr>
     <td>Legal English only</td>
@@ -183,10 +188,15 @@ The prompts live in [`src/lib/agents.ts`](src/lib/agents.ts) and the schemas in 
 
 ---
 
-## 🌐 Three languages, five kinds of reader
+## 🌐 Local-language cases, three interface languages, five kinds of reader
 
-Switch **EN · हि · म** from any page: the interface, the four agents' output and the PDF report all follow.
-At sign-up you pick who you are, and the agents adjust their depth and tone.
+**Case documents in the court's own language.** District courts in India often work in the local language. LexAgent's
+agents read case files written in **Marathi, Hindi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam, Punjabi, Odia,
+Urdu, English or a mix**, in the original, and say which language the document is in.
+
+**Answers in your language.** Switch **EN · हि · म** from any page: the interface, the four agents' output and the PDF
+report all follow, whatever language the case file is in. At sign-up you pick who you are, and the agents adjust their
+depth and tone.
 
 <table>
   <tr>
@@ -209,7 +219,8 @@ At sign-up you pick who you are, and the agents adjust their depth and tone.
 
 > [!NOTE]
 > Names of Acts, section numbers and party names stay as they appear in the document, so they can be checked against the record.
-> In demo mode (no AI key) the stored sample analyses are in English.
+> **Hindi and Marathi PDFs:** many have a broken text layer (the page looks fine, but the extracted text is scrambled),
+> or are scans. LexAgent detects this and asks for the Word or text version, or pasted text, instead of guessing.
 
 ---
 
@@ -240,12 +251,25 @@ disclaimer on every page. Hindi and Marathi reports embed a Devanagari font.
 
 ## 📂 Sample cases
 
-The [`sample-cases/`](sample-cases) folder has five **fictional** Indian case documents, each as **PDF, DOCX and TXT**,
-so you can try the upload straight away. On the live site the same files are linked under
-*Download sample case files* on the dashboard.
+The [`sample-cases/`](sample-cases) folder has seven **fictional** Indian case documents, in **English, Marathi and Hindi**,
+so you can try the upload straight away. On the live site the same files are linked under *Download sample case files*
+on the dashboard.
 
-| Case | Law | Files |
-|---|---|---|
+| Case | Language | Law | Files |
+|---|---|---|---|
+| Cheque bounce, Pune | English | NI Act, 1881 · s.138 | [PDF](sample-cases/01-cheque-bounce-ni-act.pdf) · [DOCX](sample-cases/01-cheque-bounce-ni-act.docx) · [TXT](sample-cases/01-cheque-bounce-ni-act.txt) |
+| Defective phone, Nashik | English | Consumer Protection Act, 2019 | [PDF](sample-cases/02-defective-phone-consumer.pdf) · [DOCX](sample-cases/02-defective-phone-consumer.docx) · [TXT](sample-cases/02-defective-phone-consumer.txt) |
+| Job-offer fraud bail, Nagpur | English | BNS s.318(4) · BNSS s.480 | [PDF](sample-cases/03-job-fraud-cheating-bns.pdf) · [DOCX](sample-cases/03-job-fraud-cheating-bns.docx) · [TXT](sample-cases/03-job-fraud-cheating-bns.txt) |
+| Tenant eviction, Mumbai | English | Maharashtra Rent Control Act, 1999 | [PDF](sample-cases/04-tenant-eviction-rent-act.pdf) · [DOCX](sample-cases/04-tenant-eviction-rent-act.docx) · [TXT](sample-cases/04-tenant-eviction-rent-act.txt) |
+| Road accident claim, Kolhapur | English | Motor Vehicles Act, 1988 · s.166 | [PDF](sample-cases/05-motor-accident-claim.pdf) · [DOCX](sample-cases/05-motor-accident-claim.docx) · [TXT](sample-cases/05-motor-accident-claim.txt) |
+| शेतरस्ता मनाई हुकूम, वडूज (सातारा) | **मराठी** | Easements Act s.15 · Specific Relief Act s.38–39 · MLRC s.143 | [DOCX](sample-cases/06-farm-road-injunction-marathi.docx) · [TXT](sample-cases/06-farm-road-injunction-marathi.txt) |
+| भरण-पोषण, कुटुंब न्यायालय भोपाल | **हिन्दी** | BNSS s.144 | [DOCX](sample-cases/07-maintenance-hindi.docx) · [TXT](sample-cases/07-maintenance-hindi.txt) |
+
+> [!TIP]
+> **Demo mode is honest.** Without an AI key, LexAgent recognises these sample files (as PDF, DOCX or TXT) and shows their
+> stored analysis. For any other document it says it can't analyse it in demo mode, instead of showing a different case.
+
+---|---|---|
 | Cheque bounce, Pune | NI Act, 1881 · s.138 | [PDF](sample-cases/01-cheque-bounce-ni-act.pdf) · [DOCX](sample-cases/01-cheque-bounce-ni-act.docx) · [TXT](sample-cases/01-cheque-bounce-ni-act.txt) |
 | Defective phone, Nashik | Consumer Protection Act, 2019 | [PDF](sample-cases/02-defective-phone-consumer.pdf) · [DOCX](sample-cases/02-defective-phone-consumer.docx) · [TXT](sample-cases/02-defective-phone-consumer.txt) |
 | Job-offer fraud, Nagpur | BNS s.318(4) · BNSS s.480 (bail) | [PDF](sample-cases/03-job-fraud-cheating-bns.pdf) · [DOCX](sample-cases/03-job-fraud-cheating-bns.docx) · [TXT](sample-cases/03-job-fraud-cheating-bns.txt) |
@@ -345,7 +369,7 @@ npm test
 npm run lint && npm run typecheck && npm run build
 ```
 
-The tests cover the JSON parsing of model replies, retries on rate limits, zero-quota keys, the agent order (two in parallel,
+The tests cover every sample file (PDF, DOCX and TXT) being recognised as the right case, broken Devanagari PDF text being detected, the JSON parsing of model replies, retries on rate limits, zero-quota keys, the agent order (two in parallel,
 then the verifier, then the chief), the reader's role and language reaching every agent, skipping downstream agents when
 one fails, API input validation, demo-mode streaming and the PDF text sanitizer.
 
@@ -435,7 +459,7 @@ src/
    ├─ demo.ts · samples.ts   Demo mode and the in-app sample cases
    ├─ extract.ts             Browser-side PDF/DOCX/TXT text extraction
    └─ pdf/                   Graphical PDF report (react-pdf, Devanagari font for hi/mr)
-sample-cases/                Five fictional case files as PDF, DOCX and TXT (npm run samples)
+sample-cases/                Seven fictional case files in English, Marathi and Hindi (npm run samples)
 docs/readme/                 Everything you see in this README, plus the scripts that make it
 ```
 
@@ -484,11 +508,12 @@ Errors: `400` (bad JSON or under 200 characters), `413` (over 400,000 characters
 - [x] Upload PDF / DOCX / TXT with in-browser extraction
 - [x] Four-agent pipeline with live streaming progress
 - [x] Graphical PDF export with the LexAgent seal
-- [x] English, Hindi and Marathi; answers tuned to the reader's role
+- [x] Case documents in any Indian language; interface and answers in English, Hindi and Marathi
+- [x] Answers tuned to the reader's role
 - [x] Light and dark themes, phone-friendly layout
 - [x] Works with free AI providers, plus a demo mode and sample case files
 - [ ] Real accounts and saved case history (the current sign-in is a demo)
-- [ ] OCR for scanned PDFs
+- [ ] OCR for scanned PDFs and Hindi/Marathi PDFs with broken text layers
 - [ ] Long judgments: chunked reading beyond the input cap
 - [ ] More Indian languages
 
@@ -509,15 +534,21 @@ Not yet. Accounts are stored only in your browser, with hashed passwords, so any
 </details>
 
 <details>
-<summary><b>Why do I see "Demo mode"?</b></summary>
+<summary><b>Why do I see "Demo mode", or "Demo mode can only analyse the sample cases"?</b></summary>
 <br>
-No AI key is set on the server. LexAgent then shows the stored analysis of a sample case so the whole flow still works. Follow <a href="#-put-it-online-with-your-ai-key-vercel">the Vercel steps</a> to switch to live AI.
+No AI key with quota is set on the server. LexAgent then shows the stored analysis of a recognised sample case so the whole flow still works, and refuses other documents rather than showing the wrong case. Follow <a href="#-put-it-online-with-your-ai-key-vercel">the Vercel steps</a> to switch to live AI.
 </details>
 
 <details>
 <summary><b>It says "This AI key has no quota yet"</b></summary>
 <br>
 The provider accepted the key but allows 0 requests. For Mistral, activate the free Experiment plan in the console (step 1 above), then try again.
+</details>
+
+<details>
+<summary><b>Can it read Marathi or Hindi court documents?</b></summary>
+<br>
+Yes. Upload them as Word (.docx) or text files, or paste the text, and the agents read them in the original language. Many Hindi/Marathi PDFs have a broken text layer or are scans; LexAgent detects that and asks for another format. OCR for scanned and broken PDFs is on the roadmap.
 </details>
 
 <details>
@@ -529,7 +560,7 @@ Only text-based PDFs for now. A scanned PDF has no text layer, and LexAgent tell
 <details>
 <summary><b>Are the sample cases real?</b></summary>
 <br>
-No. All of them are fictional, written to show how the agents handle criminal complaints, bail, consumer, tenancy and accident-claim cases.
+No. All of them are fictional, written to show how the agents handle criminal complaints, bail, consumer, tenancy, accident-claim, Marathi civil and Hindi family-court cases.
 </details>
 
 ---

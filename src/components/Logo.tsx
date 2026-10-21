@@ -8,7 +8,7 @@ export function LogoMark({ size = 34 }: { size?: number }) {
         <path d="M32 14v34M22 48h20M18 22h28" />
         <path d="M18 22l-7 14h14zM46 22l-7 14h14z" />
       </g>
-      <circle cx="32" cy="14" r="3.6" fill="var(--seal)" />
+      <circle cx="32" cy="14" r="3.6" fill="var(--on-primary)" />
     </svg>
   );
 }

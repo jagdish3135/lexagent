@@ -17,14 +17,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f7f7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1a1c" },
-  ],
+  themeColor: "#ffffff",
 };
 
-// Applies the saved theme before first paint, so there is no flash of the wrong theme.
-const themeScript = `try{var t=localStorage.getItem("lexagent.theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;var l=localStorage.getItem("lexagent.lang");if(l==="hi"||l==="mr")document.documentElement.lang=l}catch(e){}`;
+// Light by default; dark only when the user picked it. Applied before first paint so nothing flashes.
+const themeScript = `try{var t=localStorage.getItem("lexagent.theme");document.documentElement.dataset.theme=t==="dark"?"dark":"light";var l=localStorage.getItem("lexagent.lang");if(l==="hi"||l==="mr")document.documentElement.lang=l}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

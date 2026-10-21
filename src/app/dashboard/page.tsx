@@ -10,8 +10,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { logOut, useSession } from "@/lib/auth";
 import { ACCEPT, ExtractError, extractText } from "@/lib/extract";
 import { LANGS, useLang, type Key } from "@/lib/i18n";
-import { SAMPLES } from "@/lib/samples";
-import { SAMPLE_FILES, SAMPLE_FORMATS } from "@/lib/sample-files";
+import { SAMPLE_BUTTONS, SAMPLES } from "@/lib/samples";
+import { SAMPLE_FILES } from "@/lib/sample-files";
 import {
   AGENTS,
   type AgentId,
@@ -128,7 +128,7 @@ export default function Dashboard() {
 
   function handle(e: StreamEvent) {
     if (e.type === "meta") setMeta(e);
-    else if (e.type === "error") setFatal(e.error);
+    else if (e.type === "error") setFatal(e.code === "demo-only" ? t("notice.demoOnly") : e.error);
     else if (e.type === "status") {
       setStatuses((s) => ({ ...s, [e.agent]: e.status }));
       if (e.output) setOutputs((o) => ({ ...o, [e.agent]: e.output }));
@@ -140,13 +140,11 @@ export default function Dashboard() {
     setExporting(true);
     try {
       const { downloadReport } = await import("@/lib/pdf/download");
-      // Demo analyses are English, so their PDF stays English whatever the interface language.
-      const pdfLang = meta?.mode === "demo" ? "en" : runLang;
       await downloadReport(outputs, {
         mode: meta?.mode ?? "demo",
         model: meta?.model ?? "",
         source: fileName ?? sampleTitle ?? "",
-        lang: pdfLang,
+        lang: runLang,
       });
     } catch {
       setFatal(t("err.pdf"));
@@ -247,7 +245,7 @@ export default function Dashboard() {
 
                 <div className="samples">
                   <span>{t("dash.samples")}</span>
-                  {SAMPLES.map((s) => (
+                  {SAMPLES.filter((s) => SAMPLE_BUTTONS.includes(s.id)).map((s) => (
                     <button
                       key={s.id}
                       type="button"
@@ -272,7 +270,7 @@ export default function Dashboard() {
                       <li key={f.slug}>
                         {f.title}
                         <br />
-                        {SAMPLE_FORMATS.map((ext, i) => (
+                        {f.formats.map((ext, i) => (
                           <span key={ext}>
                             {i > 0 && " · "}
                             <a href={`/sample-cases/${f.slug}.${ext}`} download>
@@ -391,8 +389,8 @@ export default function Dashboard() {
                       {fatal}
                     </p>
                   )}
-                  {meta?.mode === "demo" && !sampleTitle && <p className="notice">{t("notice.demo")}</p>}
-                  {meta?.mode === "demo" && runLang !== "en" && <p className="notice">{t("notice.demoLang")}</p>}
+                  {meta?.mode === "demo" && !fatal && <p className="notice">{t("notice.demo")}</p>}
+                  {meta?.mode === "demo" && !fatal && runLang !== "en" && <p className="notice">{t("notice.demoLang")}</p>}
                   {meta?.truncated && <p className="notice">{t("notice.truncated", { n: n(meta.chars) })}</p>}
                   {Object.entries(agentErrors).map(([id, msg]) => (
                     <p key={id} className="notice error">
