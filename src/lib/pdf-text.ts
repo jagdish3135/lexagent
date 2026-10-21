@@ -38,12 +38,20 @@ export function joinTextItems(items: Item[]): string {
 }
 
 /**
- * True when Devanagari text from a PDF looks broken: many "words" that start with a vowel sign or are a lone
- * letter, which happens when the PDF has no proper text mapping (common with Hindi and Marathi PDFs).
+ * True when Devanagari text from a PDF looks broken. PDFs without a proper text mapping (common for Hindi and
+ * Marathi) lose characters in recognisable ways, so any one of these signs is enough:
+ * - many "words" that start with a vowel sign or are a lone letter (clusters split apart);
+ * - the vowel sign ि (U+093F) is missing: it is 2-5% of normal Hindi/Marathi text, but its reordered glyph often
+ *   has no mapping, so it vanishes ("दवाणी" for "दिवाणी");
+ * - conjuncts split at the virama ("न् यायाधीश"), which almost never happens in real text.
  */
 export function looksDamagedDevanagari(text: string): boolean {
-  const words = text.normalize("NFC").match(/[ऀ-ॿ]+/g) ?? [];
+  const t = text.normalize("NFC");
+  const words = t.match(/[ऀ-ॿ]+/g) ?? [];
   if (words.length < 20) return false;
+  const letters = (t.match(/[ऀ-ॿ]/g) ?? []).length;
   const broken = words.filter((w) => /^[ा-्॑-ॗॢॣ]/.test(w) || [...w].length === 1).length;
-  return broken / words.length > 0.3;
+  const iSigns = (t.match(/ि/g) ?? []).length;
+  const splitConjuncts = (t.match(/्(?=\s)/g) ?? []).length;
+  return broken / words.length > 0.3 || (letters >= 300 && iSigns / letters < 0.006) || splitConjuncts / words.length > 0.04;
 }

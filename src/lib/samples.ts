@@ -336,9 +336,8 @@ const BASE_SAMPLES: SampleCase[] = [
 
 export const SAMPLES: SampleCase[] = [...BASE_SAMPLES, ...EXTRA_SAMPLES];
 
-/** File formats shipped for a sample. Hindi/Marathi ones skip PDF: PDF text layers break Devanagari. */
-export const sampleFormats = (s: SampleCase): readonly ("pdf" | "docx" | "txt")[] =>
-  /[ऀ-ॿ]/.test(s.text) ? ["docx", "txt"] : ["pdf", "docx", "txt"];
+/** Every sample ships as PDF, DOCX and TXT (the Hindi/Marathi PDFs are scans, read with OCR). */
+export const SAMPLE_FORMATS = ["pdf", "docx", "txt"] as const;
 
 /** Samples shown as one-click buttons on the dashboard (the rest are downloadable files). */
 export const SAMPLE_BUTTONS = ["cheque", "consumer", "farmroad", "maintenance"];

@@ -20,7 +20,8 @@
   <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-0b0b0b" alt="Works with Mistral, Groq or Gemini">
   <img src="https://img.shields.io/badge/languages-English_·_हिन्दी_·_मराठी-444444" alt="English, Hindi and Marathi">
   <img src="https://img.shields.io/badge/case_files-any_Indian_language-0b0b0b" alt="Case files in any Indian language">
-  <img src="https://img.shields.io/badge/tests-21_passing-2d7d4f" alt="12 tests passing">
+  <img src="https://img.shields.io/badge/tests-23_passing-2d7d4f" alt="23 tests passing">
+  <img src="https://img.shields.io/badge/OCR-मराठी_·_हिन्दी_·_English-444444" alt="OCR for Marathi, Hindi and English">
   <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-0b0b0b" alt="Knows BNS, BNSS and BSA">
 </p>
 
@@ -102,7 +103,7 @@ Citizens often can't follow it at all, and lawyers and judges spend hours on the
   </picture>
 </p>
 
-1. **Upload**: drop a PDF, DOCX or TXT file, paste text, or pick a sample. Text is extracted **in your browser**, so the file itself is never uploaded.
+1. **Upload**: drop a PDF, DOCX or TXT file, paste text, or pick a sample. Text is extracted **in your browser**, so the file itself is never uploaded. Scanned PDFs, and Hindi/Marathi PDFs with a broken text layer, are read with **OCR** (Marathi, Hindi and English), also in the browser.
 2. **Read in parallel**: the **Summarizer** and the **Legal Analyst** read the same case independently.
 3. **Cross-check**: the **Cross-Verifier** compares both readings against the case text and flags gaps.
 4. **Conclude**: the **Chief Analyst** combines everything into a final structured analysis.
@@ -219,8 +220,9 @@ depth and tone.
 
 > [!NOTE]
 > Names of Acts, section numbers and party names stay as they appear in the document, so they can be checked against the record.
-> **Hindi and Marathi PDFs:** many have a broken text layer (the page looks fine, but the extracted text is scrambled),
-> or are scans. LexAgent detects this and asks for the Word or text version, or pasted text, instead of guessing.
+> **Scanned and broken Hindi/Marathi PDFs:** many court PDFs are scans, or have a broken text layer (the page looks fine,
+> but the extracted text is scrambled). LexAgent detects both and reads the page images with **OCR** in your browser,
+> then asks you to check the text before analysing. Nothing is uploaded for OCR.
 
 ---
 
@@ -262,10 +264,12 @@ on the dashboard.
 | Job-offer fraud bail, Nagpur | English | BNS s.318(4) · BNSS s.480 | [PDF](sample-cases/03-job-fraud-cheating-bns.pdf) · [DOCX](sample-cases/03-job-fraud-cheating-bns.docx) · [TXT](sample-cases/03-job-fraud-cheating-bns.txt) |
 | Tenant eviction, Mumbai | English | Maharashtra Rent Control Act, 1999 | [PDF](sample-cases/04-tenant-eviction-rent-act.pdf) · [DOCX](sample-cases/04-tenant-eviction-rent-act.docx) · [TXT](sample-cases/04-tenant-eviction-rent-act.txt) |
 | Road accident claim, Kolhapur | English | Motor Vehicles Act, 1988 · s.166 | [PDF](sample-cases/05-motor-accident-claim.pdf) · [DOCX](sample-cases/05-motor-accident-claim.docx) · [TXT](sample-cases/05-motor-accident-claim.txt) |
-| शेतरस्ता मनाई हुकूम, वडूज (सातारा) | **मराठी** | Easements Act s.15 · Specific Relief Act s.38–39 · MLRC s.143 | [DOCX](sample-cases/06-farm-road-injunction-marathi.docx) · [TXT](sample-cases/06-farm-road-injunction-marathi.txt) |
-| भरण-पोषण, कुटुंब न्यायालय भोपाल | **हिन्दी** | BNSS s.144 | [DOCX](sample-cases/07-maintenance-hindi.docx) · [TXT](sample-cases/07-maintenance-hindi.txt) |
+| शेतरस्ता मनाई हुकूम, वडूज (सातारा) | **मराठी** | Easements Act s.15 · Specific Relief Act s.38–39 · MLRC s.143 | [PDF (scan)](sample-cases/06-farm-road-injunction-marathi.pdf) · [DOCX](sample-cases/06-farm-road-injunction-marathi.docx) · [TXT](sample-cases/06-farm-road-injunction-marathi.txt) |
+| भरण-पोषण, कुटुंब न्यायालय भोपाल | **हिन्दी** | BNSS s.144 | [PDF (scan)](sample-cases/07-maintenance-hindi.pdf) · [DOCX](sample-cases/07-maintenance-hindi.docx) · [TXT](sample-cases/07-maintenance-hindi.txt) |
 
 > [!TIP]
+> The Marathi and Hindi PDFs are **image-only scans**, like real court copies: upload one to watch the OCR read it page by page.
+>
 > **Demo mode is honest.** Without an AI key, LexAgent recognises these sample files (as PDF, DOCX or TXT) and shows their
 > stored analysis. For any other document it says it can't analyse it in demo mode, instead of showing a different case.
 
@@ -369,7 +373,7 @@ npm test
 npm run lint && npm run typecheck && npm run build
 ```
 
-The tests cover every sample file (PDF, DOCX and TXT) being recognised as the right case, broken Devanagari PDF text being detected, the JSON parsing of model replies, retries on rate limits, zero-quota keys, the agent order (two in parallel,
+The tests cover every sample file (PDF, DOCX and TXT) being recognised as the right case, OCR of the scanned Marathi and Hindi pages, broken Devanagari PDF text being detected, the JSON parsing of model replies, retries on rate limits, zero-quota keys, the agent order (two in parallel,
 then the verifier, then the chief), the reader's role and language reaching every agent, skipping downstream agents when
 one fails, API input validation, demo-mode streaming and the PDF text sanitizer.
 
@@ -457,7 +461,8 @@ src/
    ├─ schemas.ts             zod schemas for every agent's JSON
    ├─ i18n.ts · locale.ts    English, Hindi and Marathi strings; languages and roles
    ├─ demo.ts · samples.ts   Demo mode and the in-app sample cases
-   ├─ extract.ts             Browser-side PDF/DOCX/TXT text extraction
+   ├─ extract.ts · pdf-text.ts  Browser-side PDF/DOCX/TXT extraction; broken-Devanagari detection
+   ├─ ocr.ts                 In-browser OCR (tesseract.js: Marathi, Hindi, English) for scans
    └─ pdf/                   Graphical PDF report (react-pdf, Devanagari font for hi/mr)
 sample-cases/                Seven fictional case files in English, Marathi and Hindi (npm run samples)
 docs/readme/                 Everything you see in this README, plus the scripts that make it
@@ -494,7 +499,7 @@ Errors: `400` (bad JSON or under 200 characters), `413` (over 400,000 characters
 
 ## 🛡 Privacy and safety
 
-- 📄 **Files stay on your device.** Only the extracted text is sent for analysis.
+- 📄 **Files stay on your device.** Only the extracted text is sent for analysis; OCR also runs in your browser.
 - 🔑 **The AI key lives on the server** (an environment variable) and never reaches the browser.
 - 🧱 **Strict Content-Security-Policy**: the browser can only talk to LexAgent itself.
 - 🧠 **Prompt-injection guard**: the case text is fenced and treated as data, not instructions.
@@ -506,6 +511,7 @@ Errors: `400` (bad JSON or under 200 characters), `413` (over 400,000 characters
 ## 🗺 Roadmap
 
 - [x] Upload PDF / DOCX / TXT with in-browser extraction
+- [x] OCR for scanned PDFs and Hindi/Marathi PDFs with broken text layers
 - [x] Four-agent pipeline with live streaming progress
 - [x] Graphical PDF export with the LexAgent seal
 - [x] Case documents in any Indian language; interface and answers in English, Hindi and Marathi
@@ -513,7 +519,6 @@ Errors: `400` (bad JSON or under 200 characters), `413` (over 400,000 characters
 - [x] Light and dark themes, phone-friendly layout
 - [x] Works with free AI providers, plus a demo mode and sample case files
 - [ ] Real accounts and saved case history (the current sign-in is a demo)
-- [ ] OCR for scanned PDFs and Hindi/Marathi PDFs with broken text layers
 - [ ] Long judgments: chunked reading beyond the input cap
 - [ ] More Indian languages
 
@@ -548,13 +553,13 @@ The provider accepted the key but allows 0 requests. For Mistral, activate the f
 <details>
 <summary><b>Can it read Marathi or Hindi court documents?</b></summary>
 <br>
-Yes. Upload them as Word (.docx) or text files, or paste the text, and the agents read them in the original language. Many Hindi/Marathi PDFs have a broken text layer or are scans; LexAgent detects that and asks for another format. OCR for scanned and broken PDFs is on the roadmap.
+Yes, as PDF, Word (.docx) or text, or pasted text; the agents read them in the original language. Scanned PDFs and Hindi/Marathi PDFs with a broken text layer are read with OCR in your browser (Marathi, Hindi and English models, up to 30 pages), and you are asked to check the text before analysing.
 </details>
 
 <details>
 <summary><b>Can it read scanned court orders?</b></summary>
 <br>
-Only text-based PDFs for now. A scanned PDF has no text layer, and LexAgent tells you so instead of guessing. OCR is on the roadmap.
+Yes. When a PDF has no text layer, LexAgent renders each page and reads it with OCR (tesseract.js) right in the browser, showing progress page by page. Clear scans work best; check the extracted text before you analyse it.
 </details>
 
 <details>

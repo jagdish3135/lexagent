@@ -1,11 +1,11 @@
 // Builds the sample-cases/ folder: fictional Indian case documents (English, Marathi, Hindi) as PDF, DOCX and TXT,
-// for trying LexAgent's upload. English PDFs are printed by Chromium; Hindi/Marathi cases ship as DOCX and TXT,
-// because PDF text layers break Devanagari when extracted.
+// for trying LexAgent's upload. English PDFs are printed by Chromium; Hindi/Marathi PDFs are image-only scans,
+// read by LexAgent's OCR, like the scanned court copies people actually have.
 // Usage: npm run samples
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { crc32 } from "node:zlib";
 import { chromium } from "playwright";
-import { SAMPLES, sampleFormats } from "../src/lib/samples";
+import { SAMPLES } from "../src/lib/samples";
 
 const isHeading = (line: string) => {
   const l = line.trim();
@@ -90,14 +90,36 @@ const html = (text: string) => {
 };
 
 mkdirSync("sample-cases", { recursive: true });
+mkdirSync("src/lib/__fixtures__", { recursive: true });
 const browser = await chromium.launch();
 const page = await browser.newPage();
+// A4 at 96 css px per inch; device scale 2 gives about 190 dpi, a typical court-copy scan.
+const scanPage = await browser.newPage({ viewport: { width: 794, height: 1123 }, deviceScaleFactor: 2 });
+
+/** A "scanned" PDF: each page is a slightly tilted, off-white JPEG image with no text layer, like a court copy. */
+async function scannedPdf(slug: string, text: string) {
+  await scanPage.setContent(html(text).replace("<body>", '<body style="margin:0;padding:84px 84px 96px;background:#fbfaf5">'), { waitUntil: "load" });
+  const height = await scanPage.evaluate(() => document.documentElement.scrollHeight);
+  const pages = Math.max(1, Math.ceil((height - 140) / 1123)); // ignore spill-over of the bottom padding
+  const images: string[] = [];
+  for (let i = 0; i < pages; i++) {
+    const jpg = await scanPage.screenshot({ type: "jpeg", quality: 82, clip: { x: 0, y: i * 1123, width: 794, height: 1123 }, fullPage: true });
+    writeFileSync(`src/lib/__fixtures__/${slug}-p${i + 1}.jpg`, jpg);
+    images.push(jpg.toString("base64"));
+  }
+  const doc = `<!doctype html><html><head><style>@page{size:A4;margin:0}body{margin:0}div{width:210mm;height:297mm;overflow:hidden;page-break-after:always;background:#f3f1ea}img{width:100%;transform:rotate(-0.35deg);transform-origin:center}</style></head><body>${images.map((b) => `<div><img src="data:image/jpeg;base64,${b}"></div>`).join("")}</body></html>`;
+  await page.setContent(doc, { waitUntil: "load" });
+  await page.pdf({ path: `sample-cases/${slug}.pdf`, format: "A4", printBackground: true, preferCSSPageSize: true });
+}
+
 for (const sample of SAMPLES) {
   const { slug, text } = sample;
   writeFileSync(`sample-cases/${slug}.txt`, text + "\n");
   writeFileSync(`sample-cases/${slug}.docx`, docx(text));
-  if (!sampleFormats(sample).includes("pdf")) {
-    console.log("wrote", slug, "(docx, txt)");
+  if (/[ऀ-ॿ]/.test(text)) {
+    // Hindi/Marathi: ship a scanned PDF, read by LexAgent's OCR (a text PDF's Devanagari layer would extract garbled).
+    await scannedPdf(slug, text);
+    console.log("wrote", slug, "(scanned pdf, docx, txt)");
     continue;
   }
   await page.setContent(html(text), { waitUntil: "load" });

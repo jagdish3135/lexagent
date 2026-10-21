@@ -38,6 +38,8 @@ export default function Dashboard() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [sampleTitle, setSampleTitle] = useState<string | null>(null);
   const [extracting, setExtracting] = useState(false);
+  const [ocrProgress, setOcrProgress] = useState<{ page: number; total: number } | null>(null);
+  const [fromOcr, setFromOcr] = useState(false);
   const [inputError, setInputError] = useState<Key | null>(null);
   const [drag, setDrag] = useState(false);
 
@@ -71,15 +73,18 @@ export default function Dashboard() {
     if (!file) return;
     setInputError(null);
     setExtracting(true);
+    setFromOcr(false);
     try {
-      const extracted = await extractText(file);
-      setText(extracted);
+      const extracted = await extractText(file, setOcrProgress);
+      setText(extracted.text);
+      setFromOcr(extracted.ocr);
       setFileName(file.name);
       setSampleTitle(null);
     } catch (err) {
       setInputError(err instanceof ExtractError ? err.code : "err.file");
     } finally {
       setExtracting(false);
+      setOcrProgress(null);
     }
   }
 
@@ -217,7 +222,7 @@ export default function Dashboard() {
                     <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
                     <path d="M14 3v5h5M12 18v-6M9 15l3-3 3 3" />
                   </svg>
-                  <strong>{extracting ? t("dash.reading") : t("dash.drop")}</strong>
+                  <strong>{ocrProgress ? t("dash.ocr", { page: ocrProgress.page, total: ocrProgress.total }) : extracting ? t("dash.reading") : t("dash.drop")}</strong>
                   <span>{t("dash.types")}</span>
                   <input
                     type="file"
@@ -237,6 +242,11 @@ export default function Dashboard() {
                     <span className="muted">{t("dash.chars", { n: n(text.length) })}</span>
                   </div>
                 )}
+                {fromOcr && (
+                  <p className="notice" style={{ marginTop: 10, marginBottom: 0 }}>
+                    {t("notice.ocr")}
+                  </p>
+                )}
                 {inputError && (
                   <p className="notice error" role="alert" style={{ marginTop: 10, marginBottom: 0 }}>
                     {t(inputError)}
@@ -253,6 +263,7 @@ export default function Dashboard() {
                       disabled={running}
                       onClick={() => {
                         setText(s.text);
+                        setFromOcr(false);
                         setFileName(null);
                         setSampleTitle(s.demo.summarizer.title);
                         setInputError(null);
@@ -308,6 +319,7 @@ export default function Dashboard() {
                       className="link-btn"
                       onClick={() => {
                         setText("");
+                        setFromOcr(false);
                         setFileName(null);
                         setSampleTitle(null);
                       }}

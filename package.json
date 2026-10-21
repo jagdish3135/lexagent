@@ -19,11 +19,15 @@
   "dependencies": {
     "@expo-google-fonts/noto-sans-devanagari": "0.4.1",
     "@react-pdf/renderer": "4.9.0",
+    "@tesseract.js-data/eng": "1.0.0",
+    "@tesseract.js-data/hin": "1.0.0",
+    "@tesseract.js-data/mar": "1.0.0",
     "mammoth": "1.13.0",
     "next": "16.4.2",
     "pdfjs-dist": "6.4.299",
     "react": "19.1.10",
     "react-dom": "19.1.10",
+    "tesseract.js": "7.0.0",
     "zod": "4.6.7"
   },
   "devDependencies": {

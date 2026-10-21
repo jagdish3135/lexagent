@@ -11,3 +11,4 @@ public/pdf.worker.min.mjs
 test-results/
 public/fonts/
 public/sample-cases/
+public/ocr/

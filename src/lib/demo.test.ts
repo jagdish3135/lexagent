@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { matchSample } from "./demo";
 import { joinTextItems, looksDamagedDevanagari } from "./pdf-text";
-import { SAMPLES, sampleFormats } from "./samples";
+import { SAMPLE_FORMATS, SAMPLES } from "./samples";
 
 // Same libraries and joining the browser uses for uploads (extract.ts), run in Node.
 async function pdfText(path: string) {
@@ -23,12 +23,17 @@ async function docxText(path: string) {
 
 describe("demo mode matches uploaded sample files to the right case", () => {
   for (const sample of SAMPLES) {
-    const formats = sampleFormats(sample);
-    it(`${sample.slug} (${formats.join(", ")})`, async () => {
+    it(`${sample.slug} (${SAMPLE_FORMATS.join(", ")})`, async () => {
       const base = `sample-cases/${sample.slug}`;
       expect(matchSample(readFileSync(`${base}.txt`, "utf8"))?.id).toBe(sample.id);
       expect(matchSample(await docxText(`${base}.docx`))?.id).toBe(sample.id);
-      if (formats.includes("pdf")) expect(matchSample(await pdfText(`${base}.pdf`))?.id).toBe(sample.id);
+      const pdf = await pdfText(`${base}.pdf`);
+      if (/[ऀ-ॿ]/.test(sample.text)) {
+        // Hindi/Marathi samples are image-only scans: no text layer, so the app falls back to OCR (see ocr.test.ts).
+        expect(pdf.trim()).toBe("");
+      } else {
+        expect(matchSample(pdf)?.id).toBe(sample.id);
+      }
     });
   }
 
@@ -37,7 +42,13 @@ describe("demo mode matches uploaded sample files to the right case", () => {
     const broken =
       "्र . 214/2025 ( प्र ा त् य का सा ठ का ल् प न क न मु ना प्र करण ) ी . रा म चं द्र द ा त्र य जा धव , वय 58, धं दा शे ती , रा . व डू ज , त ा. ख टा व ि ज. सा ता रा ... वा दी ि व रु द्ध श्री . सु रे श";
     expect(looksDamagedDevanagari(clean)).toBe(false);
+    expect(looksDamagedDevanagari(SAMPLES.find((s) => s.id === "maintenance")!.text)).toBe(false);
     expect(looksDamagedDevanagari(broken)).toBe(true);
+    // Lost vowel sign ि, as in many Hindi/Marathi PDFs.
+    expect(looksDamagedDevanagari(clean.replace(/ि/g, ""))).toBe(true);
+    // Conjuncts split at the virama.
+    const split = "मा. दवाणी न् यायाधीश (क नष्ठ स् तर) यांचे न् यायालय, वडूज, जल् हा सातारा नय मत दवाणी दावा क्र . 214/2025 प्र ात् य कासाठ काल् प नक नमुना प्र करण श्री रामचंद्र जाधव वादी";
+    expect(looksDamagedDevanagari(split)).toBe(true);
   });
 
   it("does not match a document that is not a sample", () => {
