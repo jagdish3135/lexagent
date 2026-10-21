@@ -69,16 +69,6 @@ if (ONLY.includes("shots")) {
     await ctx.close();
   }
   {
-    const ctx = await context({ session: false });
-    const page = await ctx.newPage();
-    await page.goto(`${BASE}/signup`);
-    await wait(1200);
-    // The sticky header would overlap the card while Playwright scrolls to it.
-    await page.addStyleTag({ content: ".site-header{position:static!important}" });
-    await page.locator(".auth-card").screenshot({ path: join(here, "signup-roles.png") });
-    await ctx.close();
-  }
-  {
     const ctx = await context({ theme: "dark", viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true });
     const page = await ctx.newPage();
     await analyzedDashboard(page, /Defective phone/);
@@ -92,7 +82,7 @@ if (ONLY.includes("shots")) {
 
 // Screenshots are converted to JPEG (the paper grain makes PNGs several MB each).
 if (ONLY.includes("shots")) {
-  for (const f of ["dashboard-hero", "landing-light", "landing-dark", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark", "signup-roles"]) {
+  for (const f of ["dashboard-hero", "landing-light", "landing-dark", "dashboard-light", "dashboard-dark", "insights-light", "insights-dark", "mobile-dark"]) {
     execFileSync("ffmpeg", ["-v", "error", "-y", "-i", join(here, `${f}.png`), "-q:v", "3", join(here, `${f}.jpg`)]);
     rmSync(join(here, `${f}.png`));
   }

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-label="Sign-up role picker: Citizen, Law student, Advocate, Judge or Researcher. The agents write the same case differently for each.">
+  <rect x="1" y="1" width="1198" height="498" fill="#0b0b0b" stroke="#f2f2f2" stroke-width="2"/>
+  <text x="40" y="52" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >SIGN UP · I AM A</text>
+  <text x="40" y="94" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#f2f2f2">Five kinds of reader. <tspan font-style="italic">One case file.</tspan></text>
+  <rect x="1022" y="46" width="46" height="36" fill="#f2f2f2" stroke="#f2f2f2"/>
+    <text x="1045" y="69" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="14" font-weight="700" fill="#0b0b0b">EN</text>
+    <rect x="1068" y="46" width="46" height="36" fill="#121212" stroke="#f2f2f2"/>
+    <text x="1091" y="69" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="14" font-weight="700" fill="#f2f2f2">हि</text>
+    <rect x="1114" y="46" width="46" height="36" fill="#121212" stroke="#f2f2f2"/>
+    <text x="1137" y="69" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="14" font-weight="700" fill="#f2f2f2">म</text>
+  <text x="1160" y="104" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" text-anchor="end" font-size="10.5">OUTPUT LANGUAGE</text>
+
+  <g transform="translate(40 128)">
+      <rect width="212" height="96" fill="#121212" stroke="#2a2a2a"/>
+      <g opacity="1">
+        <rect width="212" height="96" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="1.5"/>
+        <rect width="4" height="96" fill="#f2f2f2"/>
+        <animate attributeName="opacity" values="1;0" keyTimes="0;0.2000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+      </g>
+      <text x="20" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#f2f2f2">Citizen</text>
+      <text x="20" y="64" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">Plain words, every</text>
+      <text x="20" y="81" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">term explained</text>
+    </g>
+  <g transform="translate(267 128)">
+      <rect width="212" height="96" fill="#121212" stroke="#2a2a2a"/>
+      <g opacity="0">
+        <rect width="212" height="96" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="1.5"/>
+        <rect width="4" height="96" fill="#f2f2f2"/>
+        <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.2000;0.4000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+      </g>
+      <text x="20" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#f2f2f2">Law student</text>
+      <text x="20" y="64" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">Reasoning and</text>
+      <text x="20" y="81" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">doctrines named</text>
+    </g>
+  <g transform="translate(494 128)">
+      <rect width="212" height="96" fill="#121212" stroke="#2a2a2a"/>
+      <g opacity="0">
+        <rect width="212" height="96" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="1.5"/>
+        <rect width="4" height="96" fill="#f2f2f2"/>
+        <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.4000;0.6000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+      </g>
+      <text x="20" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#f2f2f2">Advocate</text>
+      <text x="20" y="64" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">Issues, evidence</text>
+      <text x="20" y="81" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">and procedure</text>
+    </g>
+  <g transform="translate(721 128)">
+      <rect width="212" height="96" fill="#121212" stroke="#2a2a2a"/>
+      <g opacity="0">
+        <rect width="212" height="96" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="1.5"/>
+        <rect width="4" height="96" fill="#f2f2f2"/>
+        <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.6000;0.8000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+      </g>
+      <text x="20" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#f2f2f2">Judge</text>
+      <text x="20" y="64" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">Neutral, concise,</text>
+      <text x="20" y="81" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">on the record</text>
+    </g>
+  <g transform="translate(948 128)">
+      <rect width="212" height="96" fill="#121212" stroke="#2a2a2a"/>
+      <g opacity="0">
+        <rect width="212" height="96" fill="#1e1e1e" stroke="#f2f2f2" stroke-width="1.5"/>
+        <rect width="4" height="96" fill="#f2f2f2"/>
+        <animate attributeName="opacity" values="0;1" keyTimes="0;0.8000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+      </g>
+      <text x="20" y="40" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#f2f2f2">Researcher</text>
+      <text x="20" y="64" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">Thorough and</text>
+      <text x="20" y="81" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13" fill="#9a9a9a">structured</text>
+    </g>
+
+  <g transform="translate(40 254)">
+    <rect width="1120" height="184" fill="#121212" stroke="#2a2a2a"/>
+    <g transform="translate(28 181)"><rect x="0" y="0" height="3" fill="#f2f2f2" width="0"><animate attributeName="width" values="0;1064" dur="3s" repeatCount="indefinite"/></rect></g>
+    <g opacity="1">
+      <text x="28" y="40" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >THE SUMMARY · WRITTEN FOR A CITIZEN</text>
+      <text x="28" y="84" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Mr. Patil gave the dealer a cheque for Rs. 4.5 lakh. The bank returned it because there was not enough money.</text>
+      <text x="28" y="114" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">The law on bounced cheques (Section 138, Negotiable Instruments Act) makes this a crime if he did not pay</text>
+      <text x="28" y="144" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">within 15 days of a written demand. That demand letter is called a “legal notice”.</text>
+      <animate attributeName="opacity" values="1;0" keyTimes="0;0.2000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="40" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >THE SUMMARY · WRITTEN FOR A LAW STUDENT</text>
+      <text x="28" y="84" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">A complaint under s.138 NI Act. With the signature admitted, s.139 presumes the cheque was for a debt;</text>
+      <text x="28" y="114" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">the accused may rebut it on a preponderance of probabilities (Rangappa v. Sri Mohan, 2010).</text>
+      <text x="28" y="144" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">The “security cheque” defence goes to that rebuttal, not to the elements of the offence.</text>
+      <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.2000;0.4000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="40" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >THE SUMMARY · WRITTEN FOR AN ADVOCATE</text>
+      <text x="28" y="84" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Issues: (i) a legally enforceable debt, or only security; (ii) service of the demand notice; (iii) limitation.</text>
+      <text x="28" y="114" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Evidence to secure: return memo of 17.01.2025, postal tracking for 08.02.2025, ledger and delivery challans.</text>
+      <text x="28" y="144" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">The notice went to the address printed on the cheque, which the accused admits is his residence.</text>
+      <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.4000;0.6000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="40" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >THE SUMMARY · WRITTEN FOR A JUDGE</text>
+      <text x="28" y="84" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Complaint under s.138 NI Act. Dishonour (17.01.2025) and the demand notice (05.02.2025) are on record.</text>
+      <text x="28" y="114" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Signature admitted. Non-receipt of notice is pleaded, though the address on the cheque is admitted.</text>
+      <text x="28" y="144" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">The burden lies on the accused to rebut the presumption under s.139.</text>
+      <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.6000;0.8000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+    </g>
+    <g opacity="0">
+      <text x="28" y="40" font-family="'Cascadia Mono', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" letter-spacing="2.6" fill="#9a9a9a" >THE SUMMARY · WRITTEN FOR A RESEARCHER</text>
+      <text x="28" y="84" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Statute: NI Act ss.118, 138, 139 and 142. Elements, presumptions, notice and limitation set out in order,</text>
+      <text x="28" y="114" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">with the leading authority (Rangappa v. Sri Mohan, 2010) and the points to check against the record.</text>
+      <text x="28" y="144" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="17" fill="#f2f2f2">Every section cited is listed with the Act it comes from.</text>
+      <animate attributeName="opacity" values="0;1" keyTimes="0;0.8000" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <text x="40" y="474" font-family="'Segoe UI', Helvetica, Arial, 'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="13.5" fill="#9a9a9a">One cheque-bounce case, five readers: the agents change depth and tone, never the facts · output in English, Hindi or Marathi</text>
+</svg>

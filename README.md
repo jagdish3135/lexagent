@@ -15,11 +15,11 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs" alt="Next.js 16">
-  <img src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white" alt="TypeScript strict">
+  <img src="https://img.shields.io/badge/TypeScript-strict-444444?logo=typescript&logoColor=white" alt="TypeScript strict">
   <img src="https://img.shields.io/badge/AI-Mistral_·_Groq_·_Gemini-0b0b0b" alt="Works with Mistral, Groq or Gemini">
   <img src="https://img.shields.io/badge/languages-English_·_Hindi_·_Marathi-444444" alt="English, Hindi and Marathi">
   <img src="https://img.shields.io/badge/case_files-any_Indian_language-0b0b0b" alt="Case files in any Indian language">
-  <img src="https://img.shields.io/badge/tests-23_passing-2d7d4f" alt="23 tests passing">
+  <img src="https://img.shields.io/badge/tests-23_passing-0b0b0b" alt="23 tests passing">
   <img src="https://img.shields.io/badge/OCR-Marathi_·_Hindi_·_English-444444" alt="OCR for Marathi, Hindi and English">
   <img src="https://img.shields.io/badge/law-BNS_·_BNSS_·_BSA-0b0b0b" alt="Knows BNS, BNSS and BSA">
 </p>
@@ -196,8 +196,12 @@ Urdu, English or a mix**, in the original, and say which language the document i
 report all follow, whatever language the case file is in. At sign-up you pick who you are, and the agents adjust their
 depth and tone.
 
-<p align="center"><img src="docs/readme/signup-roles.jpg" alt="Sign-up form with the role picker" width="460"><br>
-<sub>Sign-up with the role picker. The <b>EN · हि · म</b> switch in the header changes the language everywhere.</sub></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/roles-dark.svg">
+    <img src="docs/readme/roles-light.svg" alt="The five roles at sign-up: Citizen, Law student, Advocate, Judge and Researcher, with the same cheque-bounce summary written for each" width="100%">
+  </picture>
+</p>
 
 | Role | How the agents write for you |
 |---|---|
@@ -218,7 +222,7 @@ depth and tone.
 ## 📄 The PDF report
 
 One click on **Export PDF report** builds a real PDF in your browser: selectable text, not a screenshot. It has the
-LexAgent seal, a coloured section for each agent, a confidence stamp, a timeline, a laws table, page numbers, and the
+LexAgent seal, a numbered section for each agent, a confidence stamp, a timeline, a laws table, page numbers, and the
 disclaimer on every page. Hindi and Marathi reports embed a Devanagari font.
 
 <table>
